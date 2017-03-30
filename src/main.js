@@ -8,6 +8,9 @@ import router from './router'
 import store from './store'
 import Bus from './plugins/Bus'
 
+const __svg__ = { path: './assets/*.svg' }
+require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__)
+
 Vue.use(VueResource)
 Vue.use(VueCookie)
 Vue.use(Bus)
