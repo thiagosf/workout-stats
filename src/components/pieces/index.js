@@ -1,3 +1,5 @@
 export Icon from './Icon'
 export MainHeader from './MainHeader'
 export MainContent from './MainContent'
+export NewAccountForm from './NewAccountForm'
+export LoginForm from './LoginForm'

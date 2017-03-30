@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
+import VueForm from 'vue-form'
 
 import i18n from './helpers/i18n'
 import App from './App'
 import router from './router'
 import store from './store'
 import Bus from './plugins/Bus'
+import SimpleUi from './plugins/SimpleUi'
 
 const __svg__ = { path: './assets/*.svg' }
 require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__)
@@ -14,6 +16,8 @@ require('webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__)
 Vue.use(VueResource)
 Vue.use(VueCookie)
 Vue.use(Bus)
+Vue.use(SimpleUi)
+Vue.use(VueForm)
 Vue.config.productionTip = false
 
 i18n.install()

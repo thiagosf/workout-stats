@@ -1,3 +1,28 @@
 {
-  "welcome": "Bem-vindo <strong>%{name}</strong>"
+  "titles": {
+    "home": "Force sua evolução com estatísticas de treinos",
+    "newAccount": "Nova conta",
+    "login": "Fazer login"
+  },
+  "texts": {
+    "home": "Não estacione sua carga, avance sempre."
+  },
+  "actions": {
+    "login": "Login",
+    "newAccount": "Criar conta"
+  },
+  "modules": {
+    "users": {
+      "fields": {
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha",
+        "gender": "Sexo"
+      },
+      "genders": {
+        "female": "Feminino",
+        "male": "Masculino"
+      }
+    }
+  }
 }
