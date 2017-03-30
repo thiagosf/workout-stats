@@ -1,0 +1,105 @@
+// Settings
+$transition-settings: all 200ms
+$translate-displacement: 30px
+$scale-in: .07
+$scale-out: .07
+
+// Fade
+.pure-fade-leave,
+.pure-fade-enter-active
+  opacity: 1
+.pure-fade-leave-active,
+.pure-fade-enter
+  opacity: 0
+
+// Fade-left
+.fade-left-leave
+  opacity: 1
+  transform: translateX(0px)
+.fade-left-leave-active
+  opacity: 0
+  transform: translateX(-($translate-displacement))
+.fade-left-enter
+  opacity: 0
+  transform: translateX($translate-displacement)
+.fade-left-enter-active
+  opacity: 1
+  transform: translateX(0px)
+
+// Fade-right
+.fade-right-leave
+  opacity: 1
+  transform: translateX(0px)
+.fade-right-leave-active
+  opacity: 0
+  transform: translateX($translate-displacement)
+.fade-right-enter
+  opacity: 0
+  transform: translateX(-($translate-displacement))
+.fade-right-enter-active
+  opacity: 1
+  transform: translateX(0px)
+
+// Scale in
+.scale-in-enter
+  opacity: 0
+  transform: scale(1 - $scale-in)
+.scale-in-enter-active
+  opacity: 1
+  transform: scale(1)
+.scale-in-leave
+  opacity: 1
+  transform: scale(1)
+.scale-in-leave-active
+  opacity: 0
+  transform: scale(1 + $scale-in)
+
+// Scale-out
+.scale-out-enter
+  opacity: 0
+  transform: scale(1 + $scale-out)
+.scale-out-enter-active
+  opacity: 1
+  transform: scale(1)
+.scale-out-leave
+  opacity: 1
+  transform: scale(1)
+.scale-out-leave-active
+  opacity: 0
+  transform: scale(1 - $scale-out)
+
+// Common
+.hidden-on-transition
+  transition: all 300ms 100ms
+  transform: scale(1)
+  opacity: 1
+
+.pure-fade-enter,
+.pure-fade-enter-active,
+.fade-left-enter,
+.fade-left-enter-active,
+.fade-right-enter,
+.fade-right-enter-active,
+.scale-in-enter,
+.scale-in-enter-active,
+.scale-out-enter,
+.scale-out-enter-active
+  transition: $transition-settings
+  .hidden-on-transition
+    opacity: 0
+    transform: scale(.5)
+
+.pure-fade-leave,
+.pure-fade-leave-active,
+.fade-left-leave,
+.fade-left-leave-active,
+.fade-right-leave,
+.fade-right-leave-active,
+.scale-in-leave,
+.scale-in-leave-active,
+.scale-out-leave,
+.scale-out-leave-active
+  transition: $transition-settings
+  .hidden-on-transition
+    transition: none
+    opacity: 0
