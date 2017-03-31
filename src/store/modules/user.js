@@ -6,16 +6,16 @@ const state = {
 }
 
 const getters = {
-  getUser: (state) => {
+  getUser (state) {
     return state.user
   },
-  loggedIn: (state) => {
+  loggedIn (state) {
     return !!state.user.id
   }
 }
 
 const actions = {
-  auth: ({ commit }, data) => {
+  auth ({ commit }, data) {
     return Vue.http.post('auth/login', data)
       .then((response) => {
         if (response.body.success) {
@@ -27,7 +27,7 @@ const actions = {
         }
       })
   },
-  checkLogin: ({ commit }) => {
+  checkLogin ({ commit }) {
     let token = Vue.cookie.get('token')
     if (token) {
       let body = { token: token }
@@ -35,6 +35,7 @@ const actions = {
         .then((response) => {
           if (response.body.success) {
             let user = response.body.data
+            Vue.cookie.set('token', user.token)
             commit(types.SUCCESS_TOKEN, user)
             return user
           } else {
@@ -48,9 +49,15 @@ const actions = {
       commit(types.INVALID_TOKEN)
     }
   },
-  logout: ({ commit }) => {
+  logout ({ commit }) {
     Vue.cookie.delete('token')
     commit(types.LOGOUT)
+  },
+  createUser ({ commit }, data) {
+    let user = Object.assign({}, data, { token: '123' })
+    Vue.cookie.set('token', user.token)
+    commit(types.LOGIN, user)
+    return user
   }
 }
 
@@ -60,10 +67,9 @@ const mutations = {
   },
   [types.SUCCESS_TOKEN] (state, user) {
     Object.assign(state.user, user)
-    state.ready = true
   },
   [types.INVALID_TOKEN] (state, user) {
-    state.ready = true
+    state.user = {}
   },
   [types.LOGOUT] (state) {
     state.user = {}

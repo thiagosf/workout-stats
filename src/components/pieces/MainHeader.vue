@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="logo-box">
         <icon name="dumbbell" />
-        <p>Train More</p>
+        <p>Training Stats</p>
       </div>
     </div>
   </header>

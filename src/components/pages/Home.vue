@@ -1,35 +1,48 @@
 <template>
   <div class="home">
-    <main-header></main-header>
-    <main-content>
-      <h1>{{ $t('titles.home') }}</h1>
-      <p>{{ $t('texts.home') }}</p>
-      <div class="">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#create-account">{{ $t('titles.newAccount') }}</a></li>
-          <li><a href="#login">{{ $t('titles.login') }}</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="create-account">
-            <new-account-form></new-account-form>
-          </div>
-          <div class="tab-pane" id="login">
-            <login-form></login-form>
-          </div>
+    <h1>{{ $t('titles.home') }}</h1>
+    <p>{{ $t('texts.home') }}</p>
+    <div class="">
+      <ul class="nav nav-tabs">
+        <li :class="{ 'active': currentTab('create-account') }">
+          <a href="#" @click.prevent="showTab('create-account')">
+            {{ $t('titles.newAccount') }}
+          </a>
+        </li>
+        <li :class="{ 'active': currentTab('login') }">
+          <a href="#" @click.prevent="showTab('login')">
+            {{ $t('titles.login') }}
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div :class="{ 'tab-pane': true, 'active': currentTab('create-account') }">
+          <new-account-form></new-account-form>
+        </div>
+        <div :class="{ 'tab-pane': true, 'active': currentTab('login') }">
+          <login-form></login-form>
         </div>
       </div>
-    </main-content>
+    </div>
   </div>
 </template>
 
 <script>
-import { MainHeader, MainContent, NewAccountForm, LoginForm } from '../pieces'
+import { NewAccountForm, LoginForm } from '../pieces'
 export default {
   name: 'home',
-  components: { MainHeader, MainContent, NewAccountForm, LoginForm },
-  head: {
-    title: {
-      inner: 'Train More'
+  components: { NewAccountForm, LoginForm },
+  data () {
+    return {
+      tab: 'create-account'
+    }
+  },
+  methods: {
+    showTab (tab) {
+      this.tab = tab
+    },
+    currentTab (tab) {
+      return this.tab === tab
     }
   }
 }

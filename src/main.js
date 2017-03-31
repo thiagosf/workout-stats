@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
 import VueForm from 'vue-form'
+import VueHead from 'vue-head'
 
 import i18n from './helpers/i18n'
 import App from './App'
@@ -18,6 +19,10 @@ Vue.use(VueCookie)
 Vue.use(Bus)
 Vue.use(SimpleUi)
 Vue.use(VueForm)
+Vue.use(VueHead, {
+  separator: ' / ',
+  complement: 'Training Stats'
+})
 Vue.config.productionTip = false
 
 i18n.install()
