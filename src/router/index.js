@@ -12,10 +12,23 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
+      name: 'home',
       component: Pages.Home
-      // ,
-      // meta: { requiresAuth: true }
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Pages.Dashboard,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      beforeEnter: function (to, from, next) {
+        router.app.$store.dispatch('logout').then(() => {
+          router.push({ name: 'home' })
+        })
+      }
     }
   ]
 })
@@ -24,7 +37,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.loggedIn) {
       next({
-        name: 'signin',
+        name: 'home',
         query: { redirect: to.name, params: JSON.stringify(to.params) }
       })
     } else {

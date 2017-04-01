@@ -16,45 +16,53 @@ const getters = {
 
 const actions = {
   auth ({ commit }, data) {
-    return Vue.http.post('auth/login', data)
-      .then((response) => {
-        if (response.body.success) {
-          let user = response.body.data
-          commit(types.LOGIN, user)
-          return user
-        } else {
-          throw new Error(response.body.message)
-        }
-      })
+    let user = Object.assign({}, data, { id: 1, token: '123' })
+    Vue.cookie.set('token', user.token)
+    commit(types.LOGIN, user)
+    return user
+    // return Vue.http.post('auth/login', data)
+    //   .then((response) => {
+    //     if (response.body.success) {
+    //       let user = response.body.data
+    //       commit(types.LOGIN, user)
+    //       return user
+    //     } else {
+    //       throw new Error(response.body.message)
+    //     }
+    //   })
   },
   checkLogin ({ commit }) {
-    let token = Vue.cookie.get('token')
-    if (token) {
-      let body = { token: token }
-      Vue.http.post('auth/token', body)
-        .then((response) => {
-          if (response.body.success) {
-            let user = response.body.data
-            Vue.cookie.set('token', user.token)
-            commit(types.SUCCESS_TOKEN, user)
-            return user
-          } else {
-            commit(types.INVALID_TOKEN)
-          }
-        })
-        .catch(() => {
-          commit(types.INVALID_TOKEN)
-        })
-    } else {
-      commit(types.INVALID_TOKEN)
-    }
+    let user = { id: 1, token: '123' }
+    Vue.cookie.set('token', user.token)
+    commit(types.LOGIN, user)
+    return user
+    // let token = Vue.cookie.get('token')
+    // if (token) {
+    //   let body = { token: token }
+    //   Vue.http.post('auth/token', body)
+    //     .then((response) => {
+    //       if (response.body.success) {
+    //         let user = response.body.data
+    //         Vue.cookie.set('token', user.token)
+    //         commit(types.SUCCESS_TOKEN, user)
+    //         return user
+    //       } else {
+    //         commit(types.INVALID_TOKEN)
+    //       }
+    //     })
+    //     .catch(() => {
+    //       commit(types.INVALID_TOKEN)
+    //     })
+    // } else {
+    //   commit(types.INVALID_TOKEN)
+    // }
   },
   logout ({ commit }) {
     Vue.cookie.delete('token')
     commit(types.LOGOUT)
   },
   createUser ({ commit }, data) {
-    let user = Object.assign({}, data, { token: '123' })
+    let user = Object.assign({}, data, { id: 1, token: '123' })
     Vue.cookie.set('token', user.token)
     commit(types.LOGIN, user)
     return user
@@ -63,10 +71,10 @@ const actions = {
 
 const mutations = {
   [types.LOGIN] (state, user) {
-    Object.assign(state.user, user)
+    state.user = user
   },
   [types.SUCCESS_TOKEN] (state, user) {
-    Object.assign(state.user, user)
+    state.user = user
   },
   [types.INVALID_TOKEN] (state, user) {
     state.user = {}

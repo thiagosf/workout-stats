@@ -1,8 +1,10 @@
 <template>
-  <div class="home">
-    <h1>{{ $t('titles.home') }}</h1>
-    <p>{{ $t('texts.home') }}</p>
-    <div class="">
+  <div class="home" v-if="loginChecked">
+    <div class="splash">
+      <h1>{{ $t('titles.home') }}</h1>
+      <p>{{ $t('texts.home') }}</p>
+    </div>
+    <div class="create-account-login-box">
       <ul class="nav nav-tabs">
         <li :class="{ 'active': currentTab('create-account') }">
           <a href="#" @click.prevent="showTab('create-account')">
@@ -34,7 +36,8 @@ export default {
   components: { NewAccountForm, LoginForm },
   data () {
     return {
-      tab: 'create-account'
+      tab: 'create-account',
+      loginChecked: false
     }
   },
   methods: {
@@ -44,6 +47,16 @@ export default {
     currentTab (tab) {
       return this.tab === tab
     }
+  },
+  created () {
+    this.$store.dispatch('checkLogin').then((user) => {
+      if (user) {
+        this.$router.push({ name: 'dashboard' })
+      }
+      this.loginChecked = true
+    }).catch(() => {
+      this.loginChecked = true
+    })
   }
 }
 </script>
