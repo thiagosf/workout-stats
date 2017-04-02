@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <app-splash v-if="!removedSplash" :active="showSplash"></app-splash>
     <main-header></main-header>
     <main-content>
       <transition
@@ -17,10 +18,10 @@
 <script>
 import WebFont from 'webfontloader'
 import { mapGetters } from 'vuex'
-import { MainHeader, MainContent, MainFooter } from './components/pieces'
+import { MainHeader, MainContent, MainFooter, AppSplash } from './components/pieces'
 export default {
   name: 'app',
-  components: { MainHeader, MainContent, MainFooter },
+  components: { MainHeader, MainContent, MainFooter, AppSplash },
   created () {
     WebFont.load({
       google: {
@@ -30,12 +31,24 @@ export default {
         ]
       }
     })
+    setTimeout(() => {
+      this.showSplash = false
+      setTimeout(() => {
+        this.removedSplash = true
+      }, 500)
+    }, 5000)
   },
   computed: {
     ...mapGetters({
       transitionName: 'getTransitionName',
       transitionMode: 'getTransitionMode'
     })
+  },
+  data () {
+    return {
+      showSplash: true,
+      removedSplash: false
+    }
   }
 }
 </script>

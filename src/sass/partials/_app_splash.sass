@@ -1,0 +1,47 @@
+.app-splash
+  position: fixed
+  z-index: 1000
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: $brand-primary
+  color: white
+  display: none
+  .logo-box
+    +center-absolute
+  &.active
+    display: block
+  &.leave
+    animation: splashHide 500ms 100ms forwards
+    pointer-events: none
+    .logo-box
+      .wrapper
+        animation: logoHide 500ms forwards
+  .logo-box
+    text-align: center
+    svg
+      width: 96px
+      height: 96px
+      display: inline-block
+      fill: currentColor
+    span
+      display: block
+      margin-top: 10px
+      font-size: 16px
+      font-family: $base-font-serif
+      text-transform: uppercase
+
+@keyframes splashHide
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+@keyframes logoHide
+  0%
+    transform: scale(1)
+    opacity: 1
+  100%
+    transform: scale(.85)
+    opacity: 0
