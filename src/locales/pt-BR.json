@@ -28,5 +28,15 @@
   },
   "footer": {
     "text": "Training Stats 2017</a>"
+  },
+  "dashboard": {
+    "stats": {
+      "dateFormat": "D [de] MMM [de] YYYY",
+      "infoText": {
+        "up": "Evoluindo!",
+        "repeat": "Repetindo",
+        "down": "Ops, regredindo..."
+      }
+    }
   }
 }

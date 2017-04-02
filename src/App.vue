@@ -17,12 +17,14 @@
 
 <script>
 import WebFont from 'webfontloader'
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 import { MainHeader, MainContent, MainFooter, AppSplash } from './components/pieces'
 export default {
   name: 'app',
   components: { MainHeader, MainContent, MainFooter, AppSplash },
   created () {
+    moment.locale(this.currentLocale.locale)
     WebFont.load({
       google: {
         families: [
@@ -36,12 +38,13 @@ export default {
       setTimeout(() => {
         this.removedSplash = true
       }, 500)
-    }, 5000)
+    }, 2000)
   },
   computed: {
     ...mapGetters({
       transitionName: 'getTransitionName',
-      transitionMode: 'getTransitionMode'
+      transitionMode: 'getTransitionMode',
+      currentLocale: 'getCurrentLocale'
     })
   },
   data () {
