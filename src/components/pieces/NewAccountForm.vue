@@ -38,7 +38,7 @@
       </validate>
     </div>
     <div class="submit-box">
-      <button class="btn btn-primary btn-lg">{{ $t('actions.newAccount') }}</button>
+      <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.newAccount') }}</button>
     </div>
   </vue-form>
 </template>

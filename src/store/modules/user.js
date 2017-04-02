@@ -32,12 +32,12 @@ const actions = {
     //   })
   },
   checkLogin ({ commit }) {
-    let user = { id: 1, token: '123' }
-    Vue.cookie.set('token', user.token)
-    commit(types.LOGIN, user)
-    return user
-    // let token = Vue.cookie.get('token')
-    // if (token) {
+    let token = Vue.cookie.get('token')
+    if (token) {
+      let user = { id: 1, name: 'Fulano', email: 'fulano@domain.com', token: '123' }
+      Vue.cookie.set('token', user.token)
+      commit(types.SUCCESS_TOKEN, user)
+      return user
     //   let body = { token: token }
     //   Vue.http.post('auth/token', body)
     //     .then((response) => {
@@ -55,7 +55,7 @@ const actions = {
     //     })
     // } else {
     //   commit(types.INVALID_TOKEN)
-    // }
+    }
   },
   logout ({ commit }) {
     Vue.cookie.delete('token')

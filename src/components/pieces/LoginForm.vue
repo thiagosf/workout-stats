@@ -16,7 +16,7 @@
       </field-messages>
     </validate>
     <div class="submit-box">
-      <button class="btn btn-primary btn-lg">{{ $t('actions.login') }}</button>
+      <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.login') }}</button>
     </div>
   </vue-form>
 </template>

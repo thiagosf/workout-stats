@@ -9,7 +9,8 @@
   },
   "actions": {
     "login": "Login",
-    "newAccount": "Criar conta"
+    "newAccount": "Criar conta",
+    "logout": "Sair"
   },
   "modules": {
     "users": {
@@ -26,6 +27,6 @@
     }
   },
   "footer": {
-    "developedBy": "Desenvolvido por <a href='%{link}' target='_blank'>Thiago S.F.</a>"
+    "text": "Training Stats - Código aberto <a href='https://github.com/thiagosf/train-more' target='_blank'>GitHub</a>"
   }
 }

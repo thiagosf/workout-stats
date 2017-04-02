@@ -1,5 +1,5 @@
 // Settings
-$transition-settings: all 200ms
+$transition-settings: all 300ms
 $translate-displacement: 30px
 $scale-in: .07
 $scale-out: .07
@@ -13,60 +13,60 @@ $scale-out: .07
   opacity: 0
 
 // Fade-left
-.fade-left-leave
-  opacity: 1
-  transform: translateX(0px)
 .fade-left-leave-active
   opacity: 0
   transform: translateX(-($translate-displacement))
-.fade-left-enter
-  opacity: 0
-  transform: translateX($translate-displacement)
+.fade-left-leave
+  opacity: 1
+  transform: translateX(0px)
 .fade-left-enter-active
   opacity: 1
   transform: translateX(0px)
+.fade-left-enter
+  opacity: 0
+  transform: translateX($translate-displacement)
 
 // Fade-right
-.fade-right-leave
-  opacity: 1
-  transform: translateX(0px)
 .fade-right-leave-active
   opacity: 0
   transform: translateX($translate-displacement)
-.fade-right-enter
-  opacity: 0
-  transform: translateX(-($translate-displacement))
+.fade-right-leave
+  opacity: 1
+  transform: translateX(0px)
 .fade-right-enter-active
   opacity: 1
   transform: translateX(0px)
+.fade-right-enter
+  opacity: 0
+  transform: translateX(-($translate-displacement))
 
 // Scale in
-.scale-in-enter
-  opacity: 0
-  transform: scale(1 - $scale-in)
 .scale-in-enter-active
   opacity: 1
   transform: scale(1)
-.scale-in-leave
-  opacity: 1
-  transform: scale(1)
+.scale-in-enter
+  opacity: 0
+  transform: scale(1 - $scale-in)
 .scale-in-leave-active
   opacity: 0
   transform: scale(1 + $scale-in)
+.scale-in-leave
+  opacity: 1
+  transform: scale(1)
 
 // Scale-out
-.scale-out-enter
-  opacity: 0
-  transform: scale(1 + $scale-out)
 .scale-out-enter-active
   opacity: 1
   transform: scale(1)
-.scale-out-leave
-  opacity: 1
-  transform: scale(1)
+.scale-out-enter
+  opacity: 0
+  transform: scale(1 + $scale-out)
 .scale-out-leave-active
   opacity: 0
   transform: scale(1 - $scale-out)
+.scale-out-leave
+  opacity: 1
+  transform: scale(1)
 
 // Common
 .hidden-on-transition

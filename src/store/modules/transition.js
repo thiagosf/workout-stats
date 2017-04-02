@@ -4,6 +4,7 @@ const state = {
   transitionName: 'scale-out',
   transitionMode: 'out-in',
   transitionNames: [
+    'pure-fade',
     'fade-left',
     'fade-right',
     'scale-out',

@@ -1,0 +1,41 @@
+.spinner
+  text-align: center
+  display: none
+  &.active
+    display: block
+    opacity: 0
+    animation: showSpinner 500ms forwards
+  &.full
+    position: fixed
+    z-index: 10
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba($brand-primary, .2)
+    > span
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+  > span
+    > span
+      border: 2px solid $brand-primary
+      border-top: 0
+      animation: rotateMe 500ms linear infinite
+      width: 30px
+      height: 30px
+      border-radius: 50%
+      display: inline-block
+
+@keyframes rotateMe
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@keyframes showSpinner
+  0%
+    opacity: 0
+  100%
+    opacity: 1

@@ -1,6 +1,13 @@
 <template>
   <header class="main-header">
-    <div class="container-fluid">
+    <div class="container">
+      <nav v-if="loggedIn">
+        <ul>
+          <li>
+            <router-link :to="{ name: 'logout' }">{{ $t('actions.logout') }}</router-link>
+          </li>
+        </ul>
+      </nav>
       <div class="logo-box">
         <icon name="dumbbell" />
         <span>Training Stats</span>
@@ -17,7 +24,8 @@ export default {
   components: { Icon },
   computed: {
     ...mapGetters({
-      user: 'getUser'
+      user: 'getUser',
+      loggedIn: 'loggedIn'
     })
   }
 }

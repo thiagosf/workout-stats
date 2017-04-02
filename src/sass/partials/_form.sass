@@ -1,0 +1,52 @@
+=input
+  border: 1px solid #aaa
+  box-shadow: rgba(black, .1) 0 0 0 2px
+  border-radius: 2px
+  font-size: 16px
+  line-height: 1.8
+  height: auto
+  &:hover,
+  &:active,
+  &:focus
+    border-color: $brand-primary
+    box-shadow: rgba(black, .1) 0 0 0 2px
+.form-control
+  +input
+.has-success
+  .form-control
+    +input
+    border: 1px solid $brand-success
+    &:hover,
+    &:active,
+    &:focus
+      border-color: $brand-success
+.has-error
+  .form-control
+    +input
+    border: 1px solid $brand-danger
+    &:hover,
+    &:active,
+    &:focus
+      border-color: $brand-danger
+.errors-list
+  margin-top: 5px
+  color: $brand-danger
+  font-style: italic
+  font-size: 12px
+.radio-button-gender
+  display: inline-block
+  margin: 0 0 0 0
+  cursor: pointer
+  .svg-icon
+    width: 60px
+    height: 60px
+    display: inline-block
+    fill: #bbb
+  > input
+    opacity: 0
+    position: absolute
+    top: 0
+    left: 0
+    &:checked
+      + .svg-icon
+        fill: $brand-primary

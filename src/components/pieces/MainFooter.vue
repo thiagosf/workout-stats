@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="container-fluid">
-      <p v-html="$t('footer.developedBy', { link: 'http://thiagosf.net' })"></p>
+      <p v-html="$t('footer.text')"></p>
     </div>
   </footer>
 </template>

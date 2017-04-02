@@ -1,0 +1,74 @@
+.splash
+  text-align: center
+  padding: 30px 0
+  h1
+    font-size: 28px
+    line-height: 1.1
+    margin: 0 0 10px
+    @media #{$medium-up}
+      font-size: 48px
+  p
+    font-size: 16px
+    line-height: 1.2
+    margin: 0
+    @media #{$medium-up}
+      font-size: 32px
+
+.create-account-login-box
+  @media #{$medium-up}
+    max-width: 800px
+    margin: 0 auto
+  .nav-tabs
+    border-color: #ddd
+    > li
+      @media #{$medium-up}
+        width: 50%
+        float: left
+        text-align: center
+      &.active
+        > a
+          color: $text-color
+          @media #{$medium-up}
+            color: #999
+          &::after
+            display: block
+            @media #{$medium-up}
+              display: none
+      > a
+        border-radius: 0
+        border: 0
+        margin: 0
+        background: transparent
+        position: relative
+        color: #999
+        @media #{$medium-up}
+          color: #999
+          cursor: default
+          font-size: 24px
+        &:hover,
+        &:focus
+          background: transparent
+          border: 0
+        &::after
+          content: ""
+          position: absolute
+          bottom: -3px
+          left: 0
+          right: 0
+          height: 4px
+          background: $text-color
+          display: none
+        @media #{$medium-up}
+          display: inline-block
+  .tab-content
+    margin-top: 0px
+    padding: 20px
+    background: #f1f1f1
+    @media #{$medium-up}
+      overflow: hidden
+    .tab-pane
+      @media #{$medium-up}
+        display: block
+        float: left
+        width: 50%
+        padding: 40px
