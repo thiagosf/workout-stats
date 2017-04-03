@@ -1,31 +1,35 @@
-// import * as types from './mutation-types'
+import * as types from './mutation-types'
 
 const state = {
-  // notification: {
-  //   message: null,
-  //   type: null
-  // }
+  items: {}
 }
 
 const getters = {
-  // getNotification: (state) => {
-  //   return {
-  //     message: state.notification.message,
-  //     type: state.notification.type
-  //   }
-  // }
+  saveEvolutions: (state) => {
+    return setTimeout(() => {
+      return true
+    }, 2000)
+    // return Vue.http.post('evolutions/bulk-create', this.items)
+    //   .then((response) => {
+    //     if (response.body.success) {
+    //       return true
+    //     } else {
+    //       throw new Error(response.body.message)
+    //     }
+    //   })
+  }
 }
 
 const actions = {
-  // notify: ({ commit }, notification) => {
-  //   commit(types.NOTIFY, notification)
-  // }
+  setEvolution: ({ commit }, data) => {
+    commit(types.SET_EVOLUTION, data)
+  }
 }
 
 const mutations = {
-  // [types.NOTIFY] (state, notification) {
-  //   Object.assign(state.notification, notification)
-  // }
+  [types.SET_EVOLUTION] (state, { id, weight }) {
+    state.items[id] = weight
+  }
 }
 
 export default {

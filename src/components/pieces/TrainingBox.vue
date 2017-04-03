@@ -60,15 +60,17 @@ export default {
   methods: {
     addWeight () {
       this.item.weight += 2
+      this.evolutionChange()
     },
     subtractWeight () {
       this.item.weight -= 2
       if (this.item.weight < 2) this.item.weight = 2
+      this.evolutionChange()
     },
     weightInterval (direction) {
       this.intervalTime = 200
       this.direction = direction
-      this.interval = setTimeout(this.item.weightIntervalLoop, this.intervalTime)
+      this.interval = setTimeout(this.weightIntervalLoop, this.intervalTime)
     },
     weightIntervalLoop () {
       if (this.direction === 'up') {
@@ -78,7 +80,7 @@ export default {
       }
       this.intervalTime -= 20
       if (this.intervalTime < 20) this.intervalTime = 20
-      this.interval = setTimeout(this.item.weightIntervalLoop, this.intervalTime)
+      this.interval = setTimeout(this.weightIntervalLoop, this.intervalTime)
     },
     stopWeightInterval () {
       clearInterval(this.interval)
@@ -87,12 +89,19 @@ export default {
       let lastItem = this.item.stats[index - 1]
       return {
         'item': true,
+        [`level-${index}`]: true,
         'up': lastItem && item.weight > lastItem.weight,
         'down': lastItem && item.weight < lastItem.weight
       }
     },
     statsDate (date) {
       return moment(date).format(this.$t('dashboard.stats.dateFormat'))
+    },
+    evolutionChange () {
+      this.$emit('evolutionChange', {
+        id: this.item.id,
+        weight: this.item.weight
+      })
     }
   }
 }

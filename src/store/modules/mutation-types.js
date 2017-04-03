@@ -22,3 +22,4 @@ export const SET_BREADCRUMB = `${prefix}/SET_BREADCRUMB`
 // Trainings
 
 // Evolutions
+export const SET_EVOLUTION = `${prefix}/SET_EVOLUTION`

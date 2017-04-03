@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <training-box :item="currentItem"></training-box>
+    <training-box :item="currentItem" v-on:evolutionChange="onEvolutionChange"></training-box>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
     return {
       currentIndex: 0,
       trainings: [{
+        id: 1,
         category: 'Tríceps',
         name: 'Supino',
         weight: 44,
@@ -23,10 +24,10 @@ export default {
           weight: 42,
           date: moment().subtract(4, 'day')
         }, {
-          weight: 46,
+          weight: 44,
           date: moment().subtract(2, 'day')
         }, {
-          weight: 44,
+          weight: 46,
           date: moment().subtract(1, 'day')
         }]
       }]
@@ -35,6 +36,11 @@ export default {
   computed: {
     currentItem () {
       return this.trainings[this.currentIndex]
+    }
+  },
+  methods: {
+    onEvolutionChange (data) {
+      this.$store.dispatch('setEvolution', data)
     }
   }
 }
