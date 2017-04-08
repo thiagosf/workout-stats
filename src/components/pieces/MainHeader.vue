@@ -9,8 +9,10 @@
         </ul>
       </nav>
       <div class="logo-box">
-        <icon name="dumbbell" />
-        <span>Training Stats</span>
+        <router-link :to="{ name: loggedIn ? 'dashboard' : 'home' }">
+          <icon name="dumbbell" />
+          <span>Training Stats</span>
+        </router-link>
       </div>
     </div>
   </header>

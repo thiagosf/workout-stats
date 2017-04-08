@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
   auth ({ commit }, data) {
-    let user = Object.assign({}, data, { id: 1, token: '123' })
+    let user = Object.assign({}, data, { id: 1, name: 'Fulano', email: 'fulano@domain.com', token: '123', gender: 'male' })
     Vue.cookie.set('token', user.token)
     commit(types.LOGIN, user)
     return user
@@ -34,7 +34,7 @@ const actions = {
   checkLogin ({ commit }) {
     let token = Vue.cookie.get('token')
     if (token) {
-      let user = { id: 1, name: 'Fulano', email: 'fulano@domain.com', token: '123' }
+      let user = { id: 1, name: 'Fulano', email: 'fulano@domain.com', token: '123', gender: 'male' }
       Vue.cookie.set('token', user.token)
       commit(types.SUCCESS_TOKEN, user)
       return user

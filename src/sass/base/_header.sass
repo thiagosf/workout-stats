@@ -10,19 +10,25 @@ header
     right: 0
     box-shadow: rgba(black, .4) 0 1px 3px
     .logo-box
-      svg
-        width: 32px
-        height: 32px
-        display: inline-block
-        vertical-align: middle
-        margin-right: 10px
-        fill: currentColor
-      span
-        display: inline-block
-        vertical-align: middle
-        text-transform: uppercase
-        font-size: 18px
-        font-family: $base-font-serif
+      a
+        color: white
+        &:hover,
+        &:focus,
+        &:active
+          text-decoration: none
+        svg
+          width: 32px
+          height: 32px
+          display: inline-block
+          vertical-align: middle
+          margin-right: 10px
+          fill: currentColor
+        span
+          display: inline-block
+          vertical-align: middle
+          text-transform: uppercase
+          font-size: 18px
+          font-family: $base-font-serif
     nav
       float: right
       ul

@@ -1,86 +1,36 @@
-.category-box
-  text-align: center
-  margin: 20px 0
-  p
-    margin: 0
-    font-size: 20px
-    color: #999
-    @media #{$medium-up}
-      font-size: 26px
-.training-box
-  text-align: center
-  margin: 0 0 20px 0
-  p
-    margin: 0
-    font-size: 26px
-    @media #{$medium-up}
-      font-size: 36px
-.weight-box
-  text-align: center
-  margin: 0 0 40px 0
-  .weight
-    font-size: 80px
-    font-weight: bold
-    line-height: 1
-    margin: 40px 0 0 0
-    @media #{$medium-up}
-      font-size: 120px
-    &:after
-      content: "kg"
-      font-size: 28px
-      font-weight: normal
-      color: #999
-  .weight-each-side
-    margin: 5px 0 40px 0
-    font-size: 16px
-    color: #999
-    span
-      font-weight: bold
-.evolution-box
-  .stats-info
-    margin: 0 auto 20px auto
-    max-width: 50%
-    text-align: center
-    color: #999
-    &.up
-      color: $brand-success
-    &.down
-      color: $brand-warning
-    p
-      font-size: 16px
-      margin: 0
-  .stats
-    text-align: center
-    .item
-      display: inline-block
-      margin: 0 5px
-      color: #999
-      background: #eee
-      padding: 5px
-      border-radius: 2px
-      position: relative
-      .weight
-        font-size: 20px
-      .date
-        font-size: 11px
-        max-width: 50px
-        text-transform: lowercase
-      &.up
-        color: $brand-success
-      &.down
-        color: $brand-warning
-      &.level-0
-        &.up
-          top: -4px
-        &.down
-          top: 4px
-      &.level-1
-        &.up
-          top: -8px
-        &.down
-          top: 8px
-      &.level-2
-        &.up
-          top: -12px
-        &.down
-          top: 12px
+.dashboard-button-items
+  margin: 30px 15px
+  .btn
+    display: block
+    padding: 20px 0px
+    font-size: 14px
+    word-break: break-all
+    white-space: initial
+    margin-bottom: 30px
+    .svg-icon
+      width: 40px
+      height: 40px
+      margin: 0 auto 20px auto
+      display: block
+      fill: white
+
+.btn-workout-female
+  background: $color-pink
+  &:hover
+    background: darken($color-pink, 5%)
+  &:active:focus
+    background: darken($color-pink, 10%)
+
+.btn-stats
+  background: $color-orange
+  &:hover
+    background: darken($color-orange, 5%)
+  &:active:focus
+    background: darken($color-orange, 10%)
+
+.btn-training-list
+  background: $color-blue
+  &:hover
+    background: darken($color-blue, 5%)
+  &:active:focus
+    background: darken($color-blue, 10%)

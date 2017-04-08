@@ -2,7 +2,10 @@
   "titles": {
     "home": "Force sua evolução com estatísticas de treinos",
     "newAccount": "Nova conta",
-    "login": "Fazer login"
+    "login": "Fazer login",
+    "dashboard": "Dashboard",
+    "workout": "Treino",
+    "trainingList": "Lista de treinos"
   },
   "texts": {
     "home": "Não estacione sua carga, avance sempre!"
@@ -10,7 +13,10 @@
   "actions": {
     "login": "Login",
     "newAccount": "Criar conta",
-    "logout": "Sair"
+    "logout": "Sair",
+    "trainingList": "Lista de Treinos",
+    "stats": "Estatísticas",
+    "workout": "Treinar"
   },
   "modules": {
     "users": {

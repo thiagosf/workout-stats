@@ -1,10 +1,26 @@
 <template>
-  <div class="training-box">
+  <div class="workout">
     <div class="category-box">
-      <p>{{ item.category }}</p>
+      <swipe-actions
+        v-on:onPrev="prevSwipe('categorySwipe')"
+        v-on:onNext="prevSwipe('categorySwipe')"
+        />
+      <swipe ref="categorySwipe" :options="categorySwipeOptions">
+        <swipe-item v-for="item in categories" :key="item.id" :data-id="item.trainingId">
+          <p>{{ item.name }}</p>
+        </swipe-item>
+      </swipe>
     </div>
     <div class="training-box">
-      <p>{{ item.name }}</p>
+      <swipe-actions
+        v-on:onPrev="prevSwipe('trainingSwipe')"
+        v-on:onNext="prevSwipe('trainingSwipe')"
+        />
+      <swipe ref="trainingSwipe" :options="trainingSwipeOptions">
+        <swipe-item v-for="item in trainings" :key="item.id" :data-id="item.id">
+          <p>{{ item.name }}</p>
+        </swipe-item>
+      </swipe>
     </div>
     <div class="weight-box">
       <a href="#" class="btn btn-success" @mousedown="weightInterval('up')" @mouseup="stopWeightInterval" @click.prevent="addWeight">mais</a>
@@ -28,11 +44,16 @@
 
 <script>
 import moment from 'moment'
+import Icon from './Icon'
+import SwipeActions from './SwipeActions'
 
 export default {
   name: 'dashboard',
+  components: { Icon, SwipeActions },
   props: {
-    item: { type: Object, required: true }
+    item: { type: Object, required: true },
+    categories: { type: Array, required: true },
+    trainings: { type: Array, required: true }
   },
   computed: {
     weightEachSide () {
@@ -102,6 +123,26 @@ export default {
         id: this.item.id,
         weight: this.item.weight
       })
+    },
+    nextSwipe (name) {
+      this.$refs[name].next()
+    },
+    prevSwipe (name) {
+      this.$refs[name].prev()
+    }
+  },
+  data () {
+    return {
+      categorySwipeOptions: {
+        callback: (index, slide) => {
+          this.$emit('categoryChange', slide.dataset.id)
+        }
+      },
+      trainingSwipeOptions: {
+        callback: (index, slide) => {
+          this.$emit('trainingChange', slide.dataset.id)
+        }
+      }
     }
   }
 }

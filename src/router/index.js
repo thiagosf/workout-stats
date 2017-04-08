@@ -22,6 +22,18 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
+      path: '/workout',
+      name: 'workout',
+      component: Pages.Workout,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/training-list',
+      name: 'training-list',
+      component: Pages.TrainingList,
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/logout',
       name: 'logout',
       beforeEnter: function (to, from, next) {
