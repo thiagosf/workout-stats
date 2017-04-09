@@ -2,7 +2,7 @@
   "name": "Training Stats",
   "short_name": "Training",
   "theme_color": "#f4511e",
-  "background_color": "#ffffff",
+  "background_color": "#f4511e",
   "display": "standalone",
   "Scope": "/",
   "start_url": "/",
