@@ -25,7 +25,7 @@
     <ul class="training-list-edit">
       <li v-for="(item, index) in categories">
         <a href="#" class="btn btn-warning btn-sm" @click.prevent="removeCategory(index)">Remover categoria</a>
-        <edit-inline :value="item.name" :data="[index]" v-on:onSubmit="changeCategory">
+        <edit-inline class="edit-inline-category" :value="item.name" :data="[index]" v-on:onSubmit="changeCategory">
           <h2>{{ item.name }}</h2>
         </edit-inline>
         <ul>
@@ -37,7 +37,7 @@
                 </edit-inline>
               </div>
               <div class="col-xs-2">
-                <a href="#" class="btn btn-warning btn-sm" @click.prevent="removeTraining(index, tindex)">x</a>
+                <a href="#" class="btn btn-warning btn-sm btn-block" @click.prevent="removeTraining(index, tindex)">x</a>
               </div>
             </div>
           </li>
@@ -105,19 +105,15 @@ export default {
       }
     },
     removeCategory (index) {
-      if (confirm('Tem certeza?')) {
-        this.categories.splice(index, 1)
-      }
+      this.categories.splice(index, 1)
     },
     removeTraining (cindex, index) {
-      if (confirm('Tem certeza?')) {
-        this.categories = this.categories.map((item, _index) => {
-          if (_index === cindex) {
-            item.trainings.splice(index, 1)
-          }
-          return item
-        })
-      }
+      this.categories = this.categories.map((item, _index) => {
+        if (_index === cindex) {
+          item.trainings.splice(index, 1)
+        }
+        return item
+      })
     },
     enableCategoryEditMode (index) {
       this.categoryIndexEdit = index
@@ -171,20 +167,33 @@ export default {
       this.categories = [
         {
           name: 'Tríceps',
-          trainings: ['Supino reto', 'Supino 45', 'Supino inclinado']
+          trainings: [
+            'Supino reto',
+            'Supino 45',
+            'Supino inclinado'
+          ]
         },
         {
           name: 'Bíceps',
-          trainings: ['Rosca na barra', 'Rosca alternada', 'Barra fixa']
+          trainings: [
+            'Rosca na barra',
+            'Rosca alternada',
+            'Barra fixa'
+          ]
         },
         {
           name: 'Pernas e ombros',
-          trainings: ['Agachamento', 'Elevação lateral']
+          trainings: [
+            'Agachamento',
+            'Elevação lateral'
+          ]
         }
       ]
     },
     onSubmit () {
-      this.$store.dispatch('saveTrainings', this.categories)
+      this.$store.dispatch('saveTrainings', this.categories).then(() => {
+        this.$router.push({ name: 'dashboard' })
+      })
     }
   },
   computed: {

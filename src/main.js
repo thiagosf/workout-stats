@@ -3,7 +3,7 @@ import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
 import VueForm from 'vue-form'
 import VueHead from 'vue-head'
-import VSwipe from 'vswipe'
+import VueTouch from 'vue-touch'
 
 import i18n from './helpers/i18n'
 import App from './App'
@@ -24,7 +24,7 @@ Vue.use(VueHead, {
   separator: ' / ',
   complement: 'Training Stats'
 })
-Vue.use(VSwipe)
+Vue.use(VueTouch, { name: 'v-touch' })
 Vue.config.productionTip = false
 
 i18n.install()

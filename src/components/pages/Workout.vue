@@ -3,8 +3,8 @@
     <training-box
       v-if="currentItem"
       v-on:evolutionChange="onEvolutionChange"
-      v-on:categoryChange="selectTrainingById"
-      v-on:trainingChange="selectTrainingById"
+      v-on:categoryChange="categoryChange"
+      v-on:trainingChange="trainingChange"
       :categories="categoryList"
       :trainings="trainingList"
       :item="currentItem"
@@ -58,13 +58,15 @@ export default {
     trainingList () {
       let currentItem = this.currentItem
       if (this.trainings && this.trainings.length > 0) {
-        return this.trainings.filter((item) => {
+        const list = this.trainings.filter((item) => {
           return item.category === currentItem.category
         }).map((item) => {
           return {
-            name: item.name
+            name: item.name,
+            id: item.id
           }
         })
+        return list
       }
     }
   },
@@ -72,24 +74,53 @@ export default {
     onEvolutionChange (data) {
       this.$store.dispatch('setEvolution', data)
     },
-    selectTrainingById (id) {
-      this.trainings.map((item, index) => {
-        if (item.id === parseInt(id)) {
-          this.currentIndex = index
+    categoryChange (direction) {
+      for (let index in this.categoryList) {
+        let item = this.categoryList[index]
+        if (item.name === this.currentItem.category) {
+          let maxIndex = this.categoryList.length - 1
+          let newIndex = direction === 'next' ? (parseInt(index) + 1) : (parseInt(index) - 1)
+          if (newIndex < 0) {
+            newIndex = maxIndex
+          } else if (newIndex > maxIndex) {
+            newIndex = 0
+          }
+          let newTrainingIndex
+          for (let j in this.trainings) {
+            if (this.trainings[j].id === this.categoryList[newIndex].trainingId) {
+              newTrainingIndex = j
+            }
+          }
+          this.currentIndex = newTrainingIndex
+          break
         }
-      })
+      }
+    },
+    trainingChange (direction) {
+      for (let index in this.trainingList) {
+        let item = this.trainingList[index]
+        if (item.id === this.currentItem.id) {
+          let maxIndex = this.trainingList.length - 1
+          let newIndex = direction === 'next' ? (parseInt(index) + 1) : (parseInt(index) - 1)
+          if (newIndex < 0) {
+            newIndex = maxIndex
+          } else if (newIndex > maxIndex) {
+            newIndex = 0
+          }
+          let newTrainingIndex
+          for (let j in this.trainings) {
+            if (this.trainings[j].id === this.trainingList[newIndex].id) {
+              newTrainingIndex = j
+            }
+          }
+          this.currentIndex = newTrainingIndex
+          break
+        }
+      }
     }
   },
   created () {
     this.$store.dispatch('loadTrainings')
-  },
-  mounted () {
-    // fix position swipe on load page
-    setTimeout(() => {
-      let event = document.createEvent('HTMLEvents')
-      event.initEvent('resize', true, true)
-      window.dispatchEvent(event)
-    }, 300)
   }
 }
 </script>

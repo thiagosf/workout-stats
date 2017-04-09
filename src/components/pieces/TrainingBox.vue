@@ -1,27 +1,27 @@
 <template>
   <div class="workout">
-    <div class="category-box">
-      <swipe-actions
-        v-on:onPrev="prevSwipe('categorySwipe')"
-        v-on:onNext="prevSwipe('categorySwipe')"
+    <v-touch
+      class="category-box"
+      v-on:swipeleft="prevSwipe('category')"
+      v-on:swiperight="nextSwipe('category')"
+      >
+      <direction-actions
+        v-on:onPrev="prevSwipe('category')"
+        v-on:onNext="nextSwipe('category')"
         />
-      <swipe ref="categorySwipe" :options="categorySwipeOptions">
-        <swipe-item v-for="item in categories" :key="item.id" :data-id="item.trainingId">
-          <p>{{ item.name }}</p>
-        </swipe-item>
-      </swipe>
-    </div>
-    <div class="training-box">
-      <swipe-actions
-        v-on:onPrev="prevSwipe('trainingSwipe')"
-        v-on:onNext="prevSwipe('trainingSwipe')"
+      <p>{{ item.category }}</p>
+    </v-touch>
+    <v-touch
+      class="training-box"
+      v-on:swipeleft="prevSwipe('training')"
+      v-on:swiperight="nextSwipe('training')"
+      >
+      <direction-actions
+        v-on:onPrev="prevSwipe('training')"
+        v-on:onNext="nextSwipe('training')"
         />
-      <swipe ref="trainingSwipe" :options="trainingSwipeOptions">
-        <swipe-item v-for="item in trainings" :key="item.id" :data-id="item.id">
-          <p>{{ item.name }}</p>
-        </swipe-item>
-      </swipe>
-    </div>
+      <p>{{ item.name }}</p>
+    </v-touch>
     <div class="weight-box">
       <a href="#" class="btn btn-success" @mousedown="weightInterval('up')" @mouseup="stopWeightInterval" @click.prevent="addWeight">mais</a>
       <p class="weight">{{ item.weight }}</p>
@@ -45,11 +45,11 @@
 <script>
 import moment from 'moment'
 import Icon from './Icon'
-import SwipeActions from './SwipeActions'
+import DirectionActions from './DirectionActions'
 
 export default {
   name: 'dashboard',
-  components: { Icon, SwipeActions },
+  components: { Icon, DirectionActions },
   props: {
     item: { type: Object, required: true },
     categories: { type: Array, required: true },
@@ -125,23 +125,17 @@ export default {
       })
     },
     nextSwipe (name) {
-      this.$refs[name].next()
+      if (name === 'category') {
+        this.$emit('categoryChange', 'next')
+      } else {
+        this.$emit('trainingChange', 'next')
+      }
     },
     prevSwipe (name) {
-      this.$refs[name].prev()
-    }
-  },
-  data () {
-    return {
-      categorySwipeOptions: {
-        callback: (index, slide) => {
-          this.$emit('categoryChange', slide.dataset.id)
-        }
-      },
-      trainingSwipeOptions: {
-        callback: (index, slide) => {
-          this.$emit('trainingChange', slide.dataset.id)
-        }
+      if (name === 'category') {
+        this.$emit('categoryChange', 'prev')
+      } else {
+        this.$emit('trainingChange', 'prev')
       }
     }
   }
