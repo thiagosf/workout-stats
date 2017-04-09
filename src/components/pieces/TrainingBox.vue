@@ -23,10 +23,10 @@
       <p>{{ item.name }}</p>
     </v-touch>
     <div class="weight-box">
-      <a href="#" class="btn btn-success" @mousedown="weightInterval('up')" @mouseup="stopWeightInterval" @click.prevent="addWeight">mais</a>
+      <span class="btn btn-success" @mousedown="weightInterval('up')" @mouseup="stopWeightInterval" @click.prevent="addWeight">mais</span>
       <p class="weight">{{ item.weight }}</p>
       <p class="weight-each-side">(<span>{{ weightEachSide }}</span>kg cada lado)</p>
-      <a href="#" class="btn btn-warning" @mousedown="weightInterval('down')" @mouseup="stopWeightInterval" @click.prevent="subtractWeight">menos</a>
+      <span class="btn btn-warning" @mousedown="weightInterval('down')" @mouseup="stopWeightInterval" @click.prevent="subtractWeight">menos</span>
     </div>
     <div class="evolution-box">
       <div :class="statsInfoClasses">
