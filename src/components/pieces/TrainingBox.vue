@@ -26,6 +26,7 @@
       <v-touch
         tag="span"
         class="btn btn-success"
+        v-on:tap="addWeight"
         v-on:press="weightInterval('up')"
         v-on:pressup="stopWeightInterval"
         @mousedown="weightInterval('up')"
@@ -37,6 +38,7 @@
       <v-touch
         tag="span"
         class="btn btn-warning"
+        v-on:tap="subtractWeight"
         v-on:press="weightInterval('down')"
         v-on:pressup="stopWeightInterval"
         @mousedown="weightInterval('down')"
