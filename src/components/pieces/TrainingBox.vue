@@ -29,9 +29,14 @@
         v-on:tap="addWeight"
         v-on:press="weightInterval('up')"
         v-on:pressup="stopWeightInterval"
+        v-on:panend="stopWeightInterval"
+        v-on:pancancel="stopWeightInterval"
+        v-on:pandown="stopWeightInterval"
+        @click.prevent="addWeight"
         @mousedown="weightInterval('up')"
         @mouseup="stopWeightInterval"
-        @click.prevent="addWeight"
+        @mouseleave="stopWeightInterval"
+        @out="stopWeightInterval"
         >mais</v-touch>
       <p class="weight">{{ item.weight }}</p>
       <p class="weight-each-side">(<span>{{ weightEachSide }}</span>kg cada lado)</p>
@@ -41,9 +46,14 @@
         v-on:tap="subtractWeight"
         v-on:press="weightInterval('down')"
         v-on:pressup="stopWeightInterval"
+        v-on:panend="stopWeightInterval"
+        v-on:pancancel="stopWeightInterval"
+        v-on:pandown="stopWeightInterval"
+        @click.prevent="subtractWeight"
         @mousedown="weightInterval('down')"
         @mouseup="stopWeightInterval"
-        @click.prevent="subtractWeight"
+        @mouseleave="stopWeightInterval"
+        @out="stopWeightInterval"
         >menos</v-touch>
     </div>
     <div class="evolution-box">
@@ -98,10 +108,12 @@ export default {
   },
   methods: {
     addWeight () {
+      this.stopWeightInterval()
       this.item.weight += 2
       this.evolutionChange()
     },
     subtractWeight () {
+      this.stopWeightInterval()
       this.item.weight -= 2
       if (this.item.weight < 2) this.item.weight = 2
       this.evolutionChange()
@@ -109,6 +121,7 @@ export default {
     weightInterval (direction) {
       this.intervalTime = 200
       this.direction = direction
+      this.stopWeightInterval()
       this.interval = setTimeout(this.weightIntervalLoop, this.intervalTime)
     },
     weightIntervalLoop () {
