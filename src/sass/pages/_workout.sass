@@ -111,3 +111,28 @@
     left: auto
     right: 0
     padding: 0 0 0 10px
+
+.inline-edit-mode
+  &.active
+    .text
+      display: none
+    .input
+      display: block
+  .text
+  .input
+    display: none
+
+.training-list-edit
+  +ul-reset
+  > li
+    margin: 0 0 20px 0
+    padding: 0 0 20px 0
+    border-bottom: 1px solid #ddd
+    > ul
+      +ul-reset
+      padding-left: 15px
+      border-left: 2px solid #eee
+      margin-bottom: 20px
+      li
+        font-size: 16px
+        line-height: 2

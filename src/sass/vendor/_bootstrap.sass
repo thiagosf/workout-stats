@@ -19,3 +19,15 @@ $brand-primary: #7e57c2
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/buttons"
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/modals"
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/navs"
+
+=row-padding($padding)
+  .row-#{$padding}-padding
+    margin-left: -#{$padding}px
+    margin-right: -#{$padding}px
+    [class*="col-"]
+      padding-left: #{$padding}px !important
+      padding-right: #{$padding}px !important
+
++row-padding(10)
++row-padding(8)
++row-padding(5)

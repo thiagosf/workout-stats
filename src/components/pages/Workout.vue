@@ -1,18 +1,19 @@
 <template>
   <div class="training">
     <training-box
-      :categories="categoryList"
-      :trainings="trainingList"
-      :item="currentItem"
+      v-if="currentItem"
       v-on:evolutionChange="onEvolutionChange"
       v-on:categoryChange="selectTrainingById"
       v-on:trainingChange="selectTrainingById"
+      :categories="categoryList"
+      :trainings="trainingList"
+      :item="currentItem"
       ></training-box>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
+import { mapGetters } from 'vuex'
 import { TrainingBox } from '../pieces'
 
 export default {
@@ -27,75 +28,44 @@ export default {
   },
   data () {
     return {
-      currentIndex: 0,
-      trainings: [{
-        id: 1,
-        category: 'Tríceps',
-        name: 'Supino',
-        weight: 44,
-        lastWeight: 44,
-        stats: [{
-          weight: 42,
-          date: moment().subtract(4, 'day')
-        }, {
-          weight: 44,
-          date: moment().subtract(2, 'day')
-        }, {
-          weight: 46,
-          date: moment().subtract(1, 'day')
-        }]
-      }, {
-        id: 2,
-        category: 'Tríceps',
-        name: 'Pull over',
-        weight: 20,
-        lastWeight: 20,
-        stats: [{
-          weight: 26,
-          date: moment().subtract(4, 'day')
-        }, {
-          weight: 20,
-          date: moment().subtract(2, 'day')
-        }, {
-          weight: 22,
-          date: moment().subtract(1, 'day')
-        }]
-      }, {
-        id: 3,
-        category: 'Tríceps',
-        name: 'Francesa',
-        weight: 56,
-        lastWeight: 56,
-        stats: [{
-          weight: 50,
-          date: moment().subtract(4, 'day')
-        }, {
-          weight: 56,
-          date: moment().subtract(2, 'day')
-        }, {
-          weight: 54,
-          date: moment().subtract(1, 'day')
-        }]
-      }]
+      currentIndex: 0
     }
   },
   computed: {
+    ...mapGetters({
+      trainings: 'getTrainings'
+    }),
     currentItem () {
       return this.trainings[this.currentIndex]
     },
     categoryList () {
-      return [
-        { name: 'Tríceps', id: 1, trainingId: 1 },
-        { name: 'Bíceps', id: 2, trainingId: 1 },
-        { name: 'Perna', id: 3, trainingId: 1 }
-      ]
+      if (this.trainings && this.trainings.length > 0) {
+        let output = []
+        let lastCategory = null
+        this.trainings.map((item) => {
+          if (lastCategory !== item.category) {
+            lastCategory = item.category
+            output.push({
+              name: item.category,
+              id: item.id,
+              trainingId: item.id
+            })
+          }
+        })
+        return output
+      }
     },
     trainingList () {
-      return [
-        { name: 'Supino', id: 1 },
-        { name: 'Pull over', id: 2 },
-        { name: 'Francesa', id: 3 }
-      ]
+      let currentItem = this.currentItem
+      if (this.trainings && this.trainings.length > 0) {
+        return this.trainings.filter((item) => {
+          return item.category === currentItem.category
+        }).map((item) => {
+          return {
+            name: item.name
+          }
+        })
+      }
     }
   },
   methods: {
@@ -109,6 +79,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    this.$store.dispatch('loadTrainings')
   },
   mounted () {
     // fix position swipe on load page

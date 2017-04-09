@@ -20,6 +20,7 @@ export const TRANSITION_MODE = `${prefix}/TRANSITION_MODE`
 export const SET_BREADCRUMB = `${prefix}/SET_BREADCRUMB`
 
 // Trainings
+export const SET_TRAININGS = `${prefix}/SET_TRAININGS`
 
 // Evolutions
 export const SET_EVOLUTION = `${prefix}/SET_EVOLUTION`
