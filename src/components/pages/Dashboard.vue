@@ -9,7 +9,7 @@
           </router-link>
         </div>
         <div class="col-xs-6 col-sm-4">
-          <router-link :to="{ name: 'workout' }" class="btn btn-lg btn-primary btn-stats">
+          <router-link :to="{ name: 'stats' }" class="btn btn-lg btn-primary btn-stats">
             <icon name="stats" />
             {{ $t('actions.stats') }}
           </router-link>

@@ -3,7 +3,7 @@
     <div class="logo-box">
       <div class="wrapper">
         <icon name="dumbbell" />
-        <span>Training Stats</span>
+        <span>{{ $t('mainTitle') }}</span>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="workout">
+  <div class="workout-box">
     <v-touch
       class="category-box"
       v-on:swipeleft="prevSwipe('category')"

@@ -1,6 +1,6 @@
 {
-  "name": "Training Stats",
-  "short_name": "Training",
+  "name": "Workout Stats",
+  "short_name": "Workout",
   "theme_color": "#f4511e",
   "background_color": "#f4511e",
   "display": "standalone",

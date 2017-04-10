@@ -34,6 +34,12 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
+      path: '/stats',
+      name: 'stats',
+      component: Pages.Stats,
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/logout',
       name: 'logout',
       beforeEnter: function (to, from, next) {

@@ -22,7 +22,7 @@ Vue.use(SimpleUi)
 Vue.use(VueForm)
 Vue.use(VueHead, {
   separator: ' / ',
-  complement: 'Training Stats'
+  complement: 'Workout Stats'
 })
 Vue.use(VueTouch, { name: 'v-touch' })
 Vue.config.productionTip = false

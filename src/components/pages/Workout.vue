@@ -1,5 +1,5 @@
 <template>
-  <div class="training">
+  <div class="workout">
     <training-box
       v-if="currentItem"
       v-on:evolutionChange="onEvolutionChange"
@@ -9,6 +9,16 @@
       :trainings="trainingList"
       :item="currentItem"
       ></training-box>
+    <div v-if="withoutTrainings">
+      <div class="jumbotron">
+        <h2>{{ $t('modules.workout.withoutTrainingList') }}</h2>
+        <p>
+          <router-link :to="{ name: 'training-list' }" class="btn btn-lg btn-primary">
+            {{ $t('actions.makeList') }}
+          </router-link>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,7 +38,8 @@ export default {
   },
   data () {
     return {
-      currentIndex: 0
+      currentIndex: 0,
+      withoutTrainings: false
     }
   },
   computed: {
@@ -117,10 +128,17 @@ export default {
           break
         }
       }
+    },
+    checkHasTrainings () {
+      if (!this.currentItem) {
+        this.withoutTrainings = true
+      }
     }
   },
   created () {
-    this.$store.dispatch('loadTrainings')
+    this.$store.dispatch('loadTrainings').then(() => {
+      this.checkHasTrainings()
+    })
   }
 }
 </script>

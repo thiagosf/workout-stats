@@ -1,4 +1,5 @@
 {
+  "mainTitle": "Workout Stats",
   "titles": {
     "home": "Force sua evolução com estatísticas de treinos",
     "newAccount": "Nova conta",
@@ -16,7 +17,8 @@
     "logout": "Sair",
     "trainingList": "Lista de Treinos",
     "stats": "Estatísticas",
-    "workout": "Treinar"
+    "workout": "Treinar",
+    "makeList": "Criar lista"
   },
   "modules": {
     "users": {
@@ -30,6 +32,9 @@
         "female": "Feminino",
         "male": "Masculino"
       }
+    },
+    "workout": {
+      "withoutTrainingList": "Você precisa criar uma lista de treinos"
     }
   },
   "footer": {
