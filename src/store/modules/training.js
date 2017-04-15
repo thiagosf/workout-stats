@@ -1,4 +1,4 @@
-import moment from 'moment'
+import Vue from 'vue'
 import * as types from './mutation-types'
 
 const state = {
@@ -14,39 +14,39 @@ const getters = {
 const actions = {
   loadTrainings: ({ commit, rootGetters }) => {
     let token = rootGetters.getUser.token
-    console.log('loadTrainings', token)
-    return []
+    return Vue.http.get('trainings', { params: { token: token } })
+      .then((response) => {
+        if (response.body.success) {
+          let trainings = response.body.data
+          commit(types.SET_TRAININGS, trainings)
+          return trainings
+        } else {
+          throw new Error(response.body.message)
+        }
+      })
   },
-  loadTrainingsForEdit: ({ commit, rootGetters }) => {
-    let token = rootGetters.getUser.token
-    console.log('loadTrainingsForEdit', token)
-    return []
-  },
-  saveTrainings: ({ commit }, list) => {
-    let output = []
-    let i = 0
+  saveTrainings: ({ commit, rootGetters }, list) => {
+    let trainings = []
     list.map((item) => {
       item.trainings.map((training) => {
-        output.push({
-          id: ++i,
-          category: item.name,
-          name: training,
-          weight: 0,
-          lastWeight: 0,
-          stats: [{
-            weight: 0,
-            date: moment().subtract(3, 'day')
-          }, {
-            weight: 0,
-            date: moment().subtract(2, 'day')
-          }, {
-            weight: 0,
-            date: moment().subtract(1, 'day')
-          }]
-        })
+        trainings.push({ category: item.name, name: training })
       })
     })
-    commit(types.SET_TRAININGS, output)
+    const token = rootGetters.getUser.token
+    const data = {
+      token: token,
+      trainings: trainings
+    }
+    return Vue.http.post('trainings/bulk_create', data)
+      .then((response) => {
+        if (response.body.success) {
+          let trainings = response.body.data
+          commit(types.SET_TRAININGS, trainings)
+          return trainings
+        } else {
+          throw new Error(response.body.message)
+        }
+      })
   }
 }
 

@@ -49,5 +49,6 @@
         "down": "Ops, regredindo..."
       }
     }
-  }
+  },
+  "internalServerError": "Erro interno"
 }

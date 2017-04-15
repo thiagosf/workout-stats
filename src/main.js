@@ -29,9 +29,9 @@ Vue.config.productionTip = false
 
 i18n.install()
 
-let apiRoot = 'https://api.trainmore.thiagosf.net'
+let apiRoot = 'https://api.workoutstats.thiagosf.net'
 if (process.env.NODE_ENV === 'development') {
-  apiRoot = 'http://api.dev.azk.io'
+  apiRoot = 'http://train-more-api.dev.azk.io'
 }
 
 Vue.http.options.root = apiRoot

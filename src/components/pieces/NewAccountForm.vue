@@ -40,6 +40,7 @@
     <div class="submit-box">
       <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.newAccount') }}</button>
     </div>
+    <div :class="messageClasses">{{ message }}</div>
   </vue-form>
 </template>
 
@@ -56,6 +57,17 @@ export default {
         email: null,
         password: null,
         gender: null
+      },
+      message: null
+    }
+  },
+  computed: {
+    messageClasses () {
+      return {
+        'form-result': true,
+        'alert': true,
+        'alert-danger': true,
+        'active': this.message
       }
     }
   },
@@ -74,10 +86,9 @@ export default {
         gender: this.model.gender
       }
       this.$store.dispatch('createUser', data).then((user) => {
-        console.log(user)
         this.$router.push({ name: 'dashboard' })
       }).catch((error) => {
-        console.log(error)
+        this.message = error.body.message || this.$t('internalServerError')
       })
     }
   }

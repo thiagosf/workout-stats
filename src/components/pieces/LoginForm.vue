@@ -18,6 +18,7 @@
     <div class="submit-box">
       <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.login') }}</button>
     </div>
+    <div :class="messageClasses">{{ message }}</div>
   </vue-form>
 </template>
 
@@ -30,6 +31,17 @@ export default {
       model: {
         email: null,
         password: null
+      },
+      message: null
+    }
+  },
+  computed: {
+    messageClasses () {
+      return {
+        'form-result': true,
+        'alert': true,
+        'alert-danger': true,
+        'active': this.message
       }
     }
   },
@@ -41,17 +53,15 @@ export default {
     },
     sendForm () {
       if (this.formstate.$invalid) return
-      // console.log(this.model.email)
-      // console.log(this.model.password)
       let data = {
         email: this.model.email,
         password: this.model.password
       }
+      this.message = null
       this.$store.dispatch('auth', data).then((user) => {
-        console.log(user)
         this.$router.push({ name: 'dashboard' })
       }).catch((error) => {
-        console.log(error)
+        this.message = error.body.message || this.$t('internalServerError')
       })
     }
   }

@@ -57,7 +57,7 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import { EditInline } from '../pieces'
 export default {
   name: 'training-list',
@@ -77,8 +77,26 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('loadTrainingsForEdit').then((list) => {
-      this.categories = list
+    this.$store.dispatch('loadTrainings').then(() => {
+      let categories = {}
+      this.trainings.map((training) => {
+        let item
+        if (categories[training.category]) {
+          item = categories[training.category]
+          item.trainings.push(training.name)
+        } else {
+          item = {
+            name: training.category,
+            trainings: [training.name]
+          }
+        }
+        categories[training.category] = item
+      })
+      let output = []
+      for (let i in categories) {
+        output.push(categories[i])
+      }
+      this.categories = output
     })
   },
   methods: {
@@ -197,6 +215,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      trainings: 'getTrainings'
+    }),
     hasCategories () {
       return this.categories.length > 0
     }
