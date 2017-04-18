@@ -1,4 +1,4 @@
-# training-stats
+# workout-stats
 
 > Acompanhe sua evolução nos treinos diários
 
