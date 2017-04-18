@@ -4,6 +4,7 @@ import VueCookie from 'vue-cookie'
 import VueForm from 'vue-form'
 import VueHead from 'vue-head'
 import VueTouch from 'vue-touch'
+import VueAnalytics from 'vue-analytics'
 
 import i18n from './helpers/i18n'
 import App from './App'
@@ -26,6 +27,10 @@ Vue.use(VueHead, {
 })
 Vue.use(VueTouch, { name: 'v-touch' })
 Vue.config.productionTip = false
+Vue.use(VueAnalytics, {
+  id: 'UA-1966000-22',
+  router
+})
 
 i18n.install()
 
