@@ -6,7 +6,8 @@
     "login": "Fazer login",
     "dashboard": "Dashboard",
     "workout": "Treino",
-    "trainingList": "Lista de treinos"
+    "trainingList": "Lista de treinos",
+    "stats": "Estatísticas"
   },
   "texts": {
     "home": "Não estacione sua carga, avance sempre!"
@@ -18,7 +19,8 @@
     "trainingList": "Lista de Treinos",
     "stats": "Estatísticas",
     "workout": "Treinar",
-    "makeList": "Criar lista"
+    "makeList": "Criar lista",
+    "back": "Voltar"
   },
   "modules": {
     "users": {

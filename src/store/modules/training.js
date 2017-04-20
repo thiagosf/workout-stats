@@ -2,12 +2,16 @@ import Vue from 'vue'
 import * as types from './mutation-types'
 
 const state = {
-  list: []
+  list: [],
+  currentTraining: null
 }
 
 const getters = {
   getTrainings: (state) => {
     return state.list
+  },
+  getCurrentTraining: (state) => {
+    return state.currentTraining
   }
 }
 
@@ -20,6 +24,19 @@ const actions = {
           let trainings = response.body.data
           commit(types.SET_TRAININGS, trainings)
           return trainings
+        } else {
+          throw new Error(response.body.message)
+        }
+      })
+  },
+  loadTraining: ({ commit, rootGetters }, id) => {
+    let token = rootGetters.getUser.token
+    return Vue.http.get(`trainings/${id}`, { params: { token: token } })
+      .then((response) => {
+        if (response.body.success) {
+          let training = response.body.data
+          commit(types.SET_TRAINING, training)
+          return training
         } else {
           throw new Error(response.body.message)
         }
@@ -53,6 +70,9 @@ const actions = {
 const mutations = {
   [types.SET_TRAININGS] (state, list) {
     state.list = list
+  },
+  [types.SET_TRAINING] (state, currentTraining) {
+    state.currentTraining = currentTraining
   }
 }
 

@@ -40,6 +40,12 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
+      path: '/stats/:id',
+      name: 'stats-show',
+      component: Pages.StatsShow,
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/logout',
       name: 'logout',
       beforeEnter: function (to, from, next) {
