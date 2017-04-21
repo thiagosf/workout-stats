@@ -5,6 +5,7 @@ import VueForm from 'vue-form'
 import VueHead from 'vue-head'
 import VueTouch from 'vue-touch'
 import VueAnalytics from 'vue-analytics'
+import 'chart.js'
 
 import i18n from './helpers/i18n'
 import App from './App'

@@ -12,6 +12,8 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "chart.js": "^2.5.0",
+    "chartkick": "^2.2.3",
     "moment": "^2.18.1",
     "vue": "^2.2.2",
     "vue-analytics": "^4.0.1",

@@ -52,5 +52,8 @@
       }
     }
   },
+  "stats": {
+    "weight": "Peso"
+  },
   "internalServerError": "Erro interno"
 }
