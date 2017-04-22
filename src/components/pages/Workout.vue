@@ -1,6 +1,5 @@
 <template>
   <div class="workout">
-    <spinner :active="loading" :full="false" />
     <training-box
       v-if="currentItem"
       v-on:evolutionChange="onEvolutionChange"
@@ -25,11 +24,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { TrainingBox, Spinner } from '../pieces'
+import { TrainingBox } from '../pieces'
 
 export default {
   name: 'workout',
-  components: { TrainingBox, Spinner },
+  components: { TrainingBox },
   head: {
     title () {
       return {
@@ -40,8 +39,7 @@ export default {
   data () {
     return {
       currentIndex: 0,
-      withoutTrainings: false,
-      loading: true
+      withoutTrainings: false
     }
   },
   computed: {
@@ -138,8 +136,9 @@ export default {
     }
   },
   created () {
+    this.$bus.$emit('enableFullSpinner')
     this.$store.dispatch('loadTrainings').then(() => {
-      this.loading = false
+      this.$bus.$emit('disableFullSpinner')
       this.checkHasTrainings()
     })
   }

@@ -20,6 +20,12 @@
             {{ $t('actions.trainingList') }}
           </router-link>
         </div>
+        <div class="col-xs-6 col-sm-4">
+          <router-link :to="{ name: 'account' }" class="btn btn-lg btn-primary btn-account">
+            <icon name="account" />
+            {{ $t('actions.myAccount') }}
+          </router-link>
+        </div>
       </div>
     </div>
   </div>

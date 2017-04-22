@@ -3,6 +3,7 @@
     <app-splash v-if="!removedSplash" :active="showSplash"></app-splash>
     <main-header></main-header>
     <main-content>
+      <spinner :active="loading" />
       <transition
         :name="transitionName"
         :mode="transitionMode"
@@ -19,10 +20,16 @@
 import WebFont from 'webfontloader'
 import moment from 'moment'
 import { mapGetters } from 'vuex'
-import { MainHeader, MainContent, MainFooter, AppSplash } from './components/pieces'
+import {
+  MainHeader,
+  MainContent,
+  MainFooter,
+  AppSplash,
+  Spinner
+} from './components/pieces'
 export default {
   name: 'app',
-  components: { MainHeader, MainContent, MainFooter, AppSplash },
+  components: { MainHeader, MainContent, MainFooter, AppSplash, Spinner },
   created () {
     moment.locale(this.currentLocale.locale)
     WebFont.load({
@@ -33,12 +40,20 @@ export default {
         ]
       }
     })
+
     setTimeout(() => {
       this.showSplash = false
       setTimeout(() => {
         this.removedSplash = true
       }, 500)
     }, 2000)
+
+    this.$bus.$on('enableFullSpinner', () => {
+      this.loading = true
+    })
+    this.$bus.$on('disableFullSpinner', () => {
+      this.loading = false
+    })
   },
   computed: {
     ...mapGetters({
@@ -50,7 +65,8 @@ export default {
   data () {
     return {
       showSplash: true,
-      removedSplash: false
+      removedSplash: false,
+      loading: false
     }
   }
 }

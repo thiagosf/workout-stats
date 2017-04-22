@@ -66,6 +66,24 @@ const actions = {
           throw new Error(response.body.message)
         }
       })
+  },
+  updateUser ({ commit, rootGetters }, data) {
+    const token = rootGetters.getUser.token
+    let putData = {
+      token: token,
+      user: data
+    }
+    return Vue.http.put('users', putData)
+      .then((response) => {
+        if (response.body.success) {
+          let user = response.body.data
+          Vue.cookie.set('token', user.token)
+          commit(types.LOGIN, user)
+          return user
+        } else {
+          throw new Error(response.body.message)
+        }
+      })
   }
 }
 

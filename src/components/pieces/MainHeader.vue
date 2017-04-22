@@ -4,7 +4,10 @@
       <nav v-if="loggedIn">
         <ul>
           <li>
-            <router-link :to="{ name: 'logout' }">{{ $t('actions.logout') }}</router-link>
+            <router-link class="logout" :to="{ name: 'logout' }">
+              <!-- {{ $t('actions.logout') }} -->
+              <icon name="power" />
+            </router-link>
           </li>
         </ul>
       </nav>

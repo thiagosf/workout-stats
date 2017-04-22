@@ -15,13 +15,10 @@
         <div slot="email">{{ $t('modules.users.validations.invalidEmail') }}</div>
       </field-messages>
     </validate>
-    <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.password)">
+    <div class="form-group">
       <label class="control-label">{{ $t('modules.users.fields.password' )}}</label>
-      <input v-model="model.password" name="password" type="password" class="form-control" required>
-      <field-messages class="errors-list" name="password" show="$submitted">
-        <div slot="required">{{ $t('modules.users.validations.requiredPassword') }}</div>
-      </field-messages>
-    </validate>
+      <input v-model="model.password" name="password" type="password" class="form-control">
+    </div>
     <div class="center">
       <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.gender)">
         <label class="control-label radio-button-gender">
@@ -38,7 +35,7 @@
       </validate>
     </div>
     <div class="submit-box">
-      <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.newAccount') }}</button>
+      <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.editAccount') }}</button>
     </div>
     <div :class="messageClasses">{{ message }}</div>
   </vue-form>
@@ -47,8 +44,11 @@
 <script>
 import Icon from './Icon'
 export default {
-  name: 'new-account-form',
+  name: 'edit-account-form',
   components: { Icon },
+  props: {
+    user: Object
+  },
   data () {
     return {
       formstate: {},
@@ -85,12 +85,17 @@ export default {
         password: this.model.password,
         gender: this.model.gender
       }
-      this.$store.dispatch('createUser', data).then((user) => {
+      this.$store.dispatch('updateUser', data).then((user) => {
         this.$router.push({ name: 'dashboard' })
       }).catch((error) => {
         this.message = error.body.message || this.$t('internalServerError')
       })
     }
+  },
+  created () {
+    this.model.name = this.user.name
+    this.model.email = this.user.email
+    this.model.gender = this.user.gender
   }
 }
 </script>

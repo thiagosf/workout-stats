@@ -25,7 +25,7 @@
     <div class="weight-box">
       <v-touch
         tag="span"
-        class="btn btn-success"
+        class="btn btn-plus"
         v-on:tap="addWeight"
         v-on:press="weightInterval('up')"
         v-on:pressup="stopWeightInterval"
@@ -37,12 +37,12 @@
         @mouseup="stopWeightInterval"
         @mouseleave="stopWeightInterval"
         @out="stopWeightInterval"
-        >mais</v-touch>
+        >+</v-touch>
       <p class="weight">{{ item.weight }}</p>
       <p class="weight-each-side">(<span>{{ weightEachSide }}</span>kg cada lado)</p>
       <v-touch
         tag="span"
-        class="btn btn-warning"
+        class="btn btn-minus"
         v-on:tap="subtractWeight"
         v-on:press="weightInterval('down')"
         v-on:pressup="stopWeightInterval"
@@ -54,7 +54,7 @@
         @mouseup="stopWeightInterval"
         @mouseleave="stopWeightInterval"
         @out="stopWeightInterval"
-        >menos</v-touch>
+        >-</v-touch>
     </div>
     <div class="evolution-box">
       <div :class="statsInfoClasses">

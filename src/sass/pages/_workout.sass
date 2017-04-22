@@ -36,7 +36,7 @@
       font-size: 80px
       font-weight: bold
       line-height: 1
-      margin: 40px 0 0 0
+      margin: 20px 0 0 0
       @media #{$medium-up}
         font-size: 120px
       &:after
@@ -45,7 +45,7 @@
         font-weight: normal
         color: #999
     .weight-each-side
-      margin: 5px 0 40px 0
+      margin: 5px 0 20px 0
       font-size: 16px
       color: #999
       span
@@ -144,3 +144,23 @@
       li
         font-size: 16px
         line-height: 2
+
+.btn-plus,
+.btn-minus
+  padding: 0 20px
+  border: 0
+  box-shadow: none
+  font-size: 64px
+  line-height: 1
+  &:active,
+  &:active:focus,
+  &:focus
+    box-shadow: none
+.btn-plus,
+  color: $brand-success
+  &:hover
+    color: lighten($brand-success, 10%)
+.btn-minus
+  color: $brand-warning
+  &:hover
+    color: lighten($brand-success, 10%)

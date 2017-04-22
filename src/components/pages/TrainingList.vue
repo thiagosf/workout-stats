@@ -1,6 +1,5 @@
 <template>
   <div class="training-list">
-    <spinner :active="loading" :full="false" />
     <h1>Lista de treinos</h1>
     <div class="row row-8-padding">
       <div class="col-xs-12">
@@ -59,10 +58,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { EditInline, Spinner } from '../pieces'
+import { EditInline } from '../pieces'
 export default {
   name: 'training-list',
-  components: { EditInline, Spinner },
+  components: { EditInline },
   head: {
     title () {
       return {
@@ -74,13 +73,13 @@ export default {
     return {
       categories: [],
       categoryIndexEdit: null,
-      trainingIndexEdit: null,
-      loading: true
+      trainingIndexEdit: null
     }
   },
   created () {
+    this.$bus.$emit('enableFullSpinner')
     this.$store.dispatch('loadTrainings').then(() => {
-      this.loading = false
+      this.$bus.$emit('disableFullSpinner')
       let categories = {}
       this.trainings.map((training) => {
         let item

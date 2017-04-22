@@ -1,6 +1,5 @@
 <template>
   <div class="stats">
-    <spinner :active="loading" :full="false" />
     <h1>{{ $t('titles.stats') }}</h1>
     <div class="stats-button-items" v-for="item in groupedTrainings">
       <h2>{{ item.category }}</h2>
@@ -18,10 +17,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { Icon, Spinner } from '../pieces'
+import { Icon } from '../pieces'
 export default {
   name: 'stats',
-  components: { Icon, Spinner },
+  components: { Icon },
   computed: {
     ...mapGetters({
       user: 'getUser',
@@ -50,14 +49,10 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      loading: true
-    }
-  },
   created () {
+    this.$bus.$emit('enableFullSpinner')
     this.$store.dispatch('loadTrainings').then(() => {
-      this.loading = false
+      this.$bus.$emit('disableFullSpinner')
     })
   }
 }

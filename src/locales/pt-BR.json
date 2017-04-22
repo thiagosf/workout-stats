@@ -7,7 +7,8 @@
     "dashboard": "Dashboard",
     "workout": "Treino",
     "trainingList": "Lista de treinos",
-    "stats": "Estatísticas"
+    "stats": "Estatísticas",
+    "myAccount": "Minha conta"
   },
   "texts": {
     "home": "Não estacione sua carga, avance sempre!"
@@ -15,12 +16,14 @@
   "actions": {
     "login": "Login",
     "newAccount": "Criar conta",
+    "editAccount": "Atualizar conta",
     "logout": "Sair",
     "trainingList": "Lista de Treinos",
     "stats": "Estatísticas",
     "workout": "Treinar",
     "makeList": "Criar lista",
-    "back": "Voltar"
+    "back": "Voltar",
+    "myAccount": "Minha conta"
   },
   "modules": {
     "users": {
@@ -33,6 +36,13 @@
       "genders": {
         "female": "Feminino",
         "male": "Masculino"
+      },
+      "validations": {
+        "requiredName": "Nome é obrigatório",
+        "requiredEmail": "E-mail é obrigatório",
+        "invalidEmail": "E-mail inválido",
+        "requiredPassword": "Digite uma senha",
+        "selectGender": "Selecione seu sexo"
       }
     },
     "workout": {
@@ -53,7 +63,9 @@
     }
   },
   "stats": {
-    "weight": "Peso"
+    "weight": "Peso",
+    "currentWeight": "Peso atual",
+    "withoutStats": "Sem estatísticas para esse treino"
   },
   "internalServerError": "Erro interno"
 }
