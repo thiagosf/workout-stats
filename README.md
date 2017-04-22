@@ -4,6 +4,6 @@
 
 ## TODO
 
-- [ ] Criar API
+- [x] Criar API
 - [ ] Aplicar i18n
 - [ ] Traduzir para inglês

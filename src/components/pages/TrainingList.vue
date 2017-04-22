@@ -32,8 +32,8 @@
           <li v-for="(training, tindex) in item.trainings">
             <div class="row row-8-padding">
               <div class="col-xs-10">
-                <edit-inline :value="training" :data="[index, tindex]" v-on:onSubmit="changeTraining">
-                  {{ training }}
+                <edit-inline :value="training.name" :data="[index, tindex]" v-on:onSubmit="changeTraining">
+                  {{ training.name }}
                 </edit-inline>
               </div>
               <div class="col-xs-2">
@@ -85,11 +85,18 @@ export default {
         let item
         if (categories[training.category]) {
           item = categories[training.category]
-          item.trainings.push(training.name)
+          item.trainings.push({
+            current_name: training.name,
+            name: training.name
+          })
         } else {
           item = {
+            current_name: training.category,
             name: training.category,
-            trainings: [training.name]
+            trainings: [{
+              current_name: training.name,
+              name: training.name
+            }]
           }
         }
         categories[training.category] = item
@@ -104,10 +111,12 @@ export default {
   methods: {
     addCategory () {
       if (this.$refs.category.value) {
+        this.categories = this.categories.reverse()
         this.categories.push({
           name: this.$refs.category.value,
           trainings: []
         })
+        this.categories = this.categories.reverse()
         this.$refs.category.value = null
       }
       this.$refs.category.focus()
@@ -116,7 +125,9 @@ export default {
       if (this.$refs.training[index].value) {
         this.categories = this.categories.map((item, _index) => {
           if (_index === index) {
-            item.trainings.push(this.$refs.training[index].value)
+            item.trainings.push({
+              name: this.$refs.training[index].value
+            })
             this.$refs.training[index].value = null
             this.$refs.training[index].focus()
           }
@@ -173,7 +184,7 @@ export default {
         if (_index === cindex) {
           item.trainings = item.trainings.map((training, tindex) => {
             if (index === tindex) {
-              training = newName
+              training.name = newName
               this.categoryIndexEdit = null
               this.trainingIndexEdit = null
             }

@@ -46,7 +46,12 @@ const actions = {
     let trainings = []
     list.map((item) => {
       item.trainings.map((training) => {
-        trainings.push({ category: item.name, name: training })
+        trainings.push({
+          current_category: item.current_name,
+          category: item.name,
+          current_name: training.current_name,
+          name: training.name
+        })
       })
     })
     const token = rootGetters.getUser.token
