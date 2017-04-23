@@ -5,5 +5,5 @@
 ## TODO
 
 - [x] Criar API
-- [ ] Aplicar i18n
+- [x] Aplicar i18n
 - [ ] Traduzir para inglês

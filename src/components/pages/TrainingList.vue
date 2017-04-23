@@ -1,37 +1,49 @@
 <template>
   <div class="training-list">
-    <h1>Lista de treinos</h1>
+    <h1>{{ $t('titles.trainingList') }}</h1>
     <div class="row row-8-padding">
       <div class="col-xs-12">
-        <label for="category">Crie uma categoria</label>
+        <label for="category">{{ $t('modules.workout.makeCategory') }}</label>
       </div>
       <div class="col-xs-8">
         <div class="form-group">
-          <input id="category" class="form-control" type="text" ref="category" @keyup.enter="addCategory" placeholder="Digite o nome da categoria">
+          <input id="category" class="form-control" type="text" ref="category" @keyup.enter="addCategory" :placeholder="$t('modules.workout.typingCategoryName')">
         </div>
       </div>
       <div class="col-xs-4">
-        <button class="btn btn-block btn-primary btn-lg" @click.prevent="addCategory">Criar</button>
+        <button class="btn btn-block btn-primary btn-lg" @click.prevent="addCategory">{{ $t('actions.create') }}</button>
       </div>
       <div class="col-xs-12">
-        <span class="help">Exemplo: <code>Treino A</code>, <code>Tríceps</code>, <code>Pernas</code></span>
+        <span class="help">
+          {{ $t('general.example') }}: <code>{{ $t('modules.workout.trainingA') }}</code>, <code>{{ $t('modules.workout.triceps') }}</code>, <code>{{ $t('modules.workout.legs') }}</code>
+        </span>
       </div>
     </div>
     <div class="make-with-model-box">
-      <p>Ou se preferir use nosso modelo de treinos:</p>
-      <button class="btn btn-sm btn-info" @click.prevent="makeWithModel">Usar modelo</button>
+      <p>{{ $t('modules.workout.trainingExampleText') }}</p>
+      <button class="btn btn-sm btn-info" @click.prevent="makeWithModel">{{ $t('actions.useModel') }}</button>
     </div>
     <hr>
     <ul class="training-list-edit">
       <li v-for="(item, index) in categories">
-        <a href="#" class="btn btn-warning btn-sm" @click.prevent="removeCategory(index)">Remover categoria</a>
+        <a href="#" class="btn btn-danger btn-sm" @click.prevent="removeCategory(index)">
+          {{ $t('actions.removeCategory')}}
+        </a>
         <edit-inline class="edit-inline-category" :value="item.name" :data="[index]" v-on:onSubmit="changeCategory">
           <h2>{{ item.name }}</h2>
         </edit-inline>
         <ul>
           <li v-for="(training, tindex) in item.trainings">
             <div class="row row-8-padding">
-              <div class="col-xs-10">
+              <div class="col-xs-3 center">
+                <span class="btn-up" @click.prevent="moveTraining('up', index, tindex)">
+                  <icon name="up-arrow" />
+                </span>
+                <span class="btn-down" @click.prevent="moveTraining('down', index, tindex)">
+                  <icon name="down-arrow" />
+                </span>
+              </div>
+              <div class="col-xs-7">
                 <edit-inline :value="training.name" :data="[index, tindex]" v-on:onSubmit="changeTraining">
                   {{ training.name }}
                 </edit-inline>
@@ -44,24 +56,26 @@
         </ul>
         <div class="row row-8-padding">
           <div class="col-xs-8">
-            <input type="text" class="form-control" ref="training" :data-index="index" @keyup.enter="addTraining(index)" placeholder="Digite o nome do treino">
+            <input type="text" class="form-control" ref="training" :data-index="index" @keyup.enter="addTraining(index)" :placeholder="$t('modules.workout.typingTrainingName')">
           </div>
           <div class="col-xs-4">
-            <button @click.prevent="addTraining(index)" class="btn btn-primary btn-lg btn-block">Criar</button>
+            <button @click.prevent="addTraining(index)" class="btn btn-primary btn-lg btn-block">
+              {{ $t('actions.create') }}
+            </button>
           </div>
         </div>
       </li>
     </ul>
-    <button @click.prevent="onSubmit" class="btn btn-success btn-lg btn-block" :disabled="!hasCategories">Salvar configurações</button>
+    <button @click.prevent="onSubmit" class="btn btn-success btn-lg btn-block" :disabled="!hasCategories">{{ $t('actions.saveSettings') }}</button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { EditInline } from '../pieces'
+import { EditInline, Icon } from '../pieces'
 export default {
   name: 'training-list',
-  components: { EditInline },
+  components: { EditInline, Icon },
   head: {
     title () {
       return {
@@ -197,26 +211,26 @@ export default {
     makeWithModel () {
       this.categories = [
         {
-          name: 'Tríceps',
+          name: this.$t('modules.workout.examples.triceps'),
           trainings: [
-            'Supino reto',
-            'Supino 45',
-            'Supino inclinado'
+            { name: this.$t('modules.workout.examples.benchPress') },
+            { name: this.$t('modules.workout.examples.benchPress45') },
+            { name: this.$t('modules.workout.examples.inclineBench') }
           ]
         },
         {
-          name: 'Bíceps',
+          name: this.$t('modules.workout.examples.biceps'),
           trainings: [
-            'Rosca na barra',
-            'Rosca alternada',
-            'Barra fixa'
+            { name: this.$t('modules.workout.examples.barbell') },
+            { name: this.$t('modules.workout.examples.alternatingBarbell') },
+            { name: this.$t('modules.workout.examples.fixedBar') }
           ]
         },
         {
-          name: 'Pernas e ombros',
+          name: this.$t('modules.workout.examples.legsAndShoulders'),
           trainings: [
-            'Agachamento',
-            'Elevação lateral'
+            { name: this.$t('modules.workout.examples.squat') },
+            { name: this.$t('modules.workout.examples.lateralLift') }
           ]
         }
       ]
@@ -225,6 +239,26 @@ export default {
       this.$store.dispatch('saveTrainings', this.categories).then(() => {
         this.$router.push({ name: 'dashboard' })
       })
+    },
+    moveTraining (direction, index, tindex) {
+      let category = this.categories[index]
+      if (direction === 'up') {
+        if (category.trainings[tindex - 1]) {
+          let trainingOne = category.trainings[tindex]
+          let trainingTwo = category.trainings[tindex - 1]
+          category.trainings[tindex - 1] = trainingOne
+          category.trainings[tindex] = trainingTwo
+        }
+      } else {
+        if (category.trainings[tindex + 1]) {
+          let trainingOne = category.trainings[tindex]
+          let trainingTwo = category.trainings[tindex + 1]
+          category.trainings[tindex + 1] = trainingOne
+          category.trainings[tindex] = trainingTwo
+        }
+      }
+      this.categories[index] = category
+      this.$forceUpdate()
     }
   },
   computed: {

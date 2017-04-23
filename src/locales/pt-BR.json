@@ -23,7 +23,11 @@
     "workout": "Treinar",
     "makeList": "Criar lista",
     "back": "Voltar",
-    "myAccount": "Minha conta"
+    "myAccount": "Minha conta",
+    "create": "Criar",
+    "useModel": "Usar modelo",
+    "removeCategory": "Remover categoria",
+    "saveSettings": "Salvar configurações"
   },
   "modules": {
     "users": {
@@ -42,11 +46,33 @@
         "requiredEmail": "E-mail é obrigatório",
         "invalidEmail": "E-mail inválido",
         "requiredPassword": "Digite uma senha",
-        "selectGender": "Selecione seu sexo"
+        "selectGender": "Selecione seu sexo",
+        "typeYourEmail": "Digite seu e-mail",
+        "typeYourPassword": "Digite sua senha"
       }
     },
     "workout": {
-      "withoutTrainingList": "Você precisa criar uma lista de treinos"
+      "withoutTrainingList": "Você precisa criar uma lista de treinos",
+      "makeCategory": "Crie uma categoria",
+      "trainingA": "Treino A",
+      "triceps": "Tríceps",
+      "legs": "Pernas",
+      "trainingExampleText": "Ou se preferir use um exemplo de treinos:",
+      "typingCategoryName": "Digite o nome da categoria",
+      "typingTrainingName": "Digite o nome do treino",
+      "examples": {
+        "triceps": "Tríceps",
+        "benchPress": "Supino reto",
+        "benchPress45": "Supino 45",
+        "inclineBench": "Supino inclinado",
+        "biceps": "Bíceps",
+        "barbell": "Rosca direta",
+        "alternatingBarbell": "Rosca alternada",
+        "fixedBar": "Barra fixa",
+        "legsAndShoulders": "Pernas e ombros",
+        "squat": "Agachamento",
+        "lateralLift": "Elevação lateral"
+      }
     }
   },
   "footer": {
@@ -67,5 +93,8 @@
     "currentWeight": "Peso atual",
     "withoutStats": "Sem estatísticas para esse treino"
   },
-  "internalServerError": "Erro interno"
+  "internalServerError": "Erro interno",
+  "general": {
+    "example": "Exemplo"
+  }
 }
