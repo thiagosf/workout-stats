@@ -109,13 +109,13 @@ export default {
   methods: {
     addWeight () {
       this.stopWeightInterval()
-      this.item.weight += 2
+      this.item.weight += 1
       this.evolutionChange()
     },
     subtractWeight () {
       this.stopWeightInterval()
-      this.item.weight -= 2
-      if (this.item.weight < 2) this.item.weight = 2
+      this.item.weight -= 1
+      if (this.item.weight < 0) this.item.weight = 0
       this.evolutionChange()
     },
     weightInterval (direction) {

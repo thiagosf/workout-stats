@@ -6,6 +6,9 @@
         <h1>{{ $t('titles.home') }}</h1>
         <p>{{ $t('texts.home') }}</p>
       </div>
+      <div class="screens-box">
+        <img :src="`/static/images/workout-screens-${locale.locale}.jpg`" />
+      </div>
       <div class="create-account-login-box">
         <ul class="nav nav-tabs">
           <li :class="{ 'active': currentTab('create-account') }">
@@ -33,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { NewAccountForm, LoginForm, Spinner } from '../pieces'
 export default {
   name: 'home',
@@ -42,6 +46,11 @@ export default {
       tab: 'create-account',
       loginChecked: false
     }
+  },
+  computed: {
+    ...mapGetters({
+      locale: 'getCurrentLocale'
+    })
   },
   methods: {
     showTab (tab) {

@@ -1,23 +1,31 @@
 <template>
   <vue-form :state="formstate" v-model="model.formstate" @submit.prevent="sendForm">
-    <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
-      <label class="control-label">{{ $t('modules.users.fields.name' )}}</label>
-      <input v-model="model.name" name="name" type="text" class="form-control" required>
-      <field-messages class="errors-list" name="name" show="$submitted">
-        <div slot="required">{{ $t('modules.users.validations.requiredName') }}</div>
-      </field-messages>
-    </validate>
-    <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.email)">
-      <label class="control-label">{{ $t('modules.users.fields.email' )}}</label>
-      <input v-model="model.email" name="email" type="email" class="form-control" required>
-      <field-messages class="errors-list" name="email" show="$submitted">
-        <div slot="required">{{ $t('modules.users.validations.requiredEmail') }}</div>
-        <div slot="email">{{ $t('modules.users.validations.invalidEmail') }}</div>
-      </field-messages>
-    </validate>
-    <div class="form-group">
-      <label class="control-label">{{ $t('modules.users.fields.password' )}}</label>
-      <input v-model="model.password" name="password" type="password" class="form-control">
+    <div class="row">
+      <div class="col-sm-12 col-md-4">
+        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.name)">
+          <label class="control-label">{{ $t('modules.users.fields.name' )}}</label>
+          <input v-model="model.name" name="name" type="text" class="form-control" required>
+          <field-messages class="errors-list" name="name" show="$submitted">
+            <div slot="required">{{ $t('modules.users.validations.requiredName') }}</div>
+          </field-messages>
+        </validate>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.email)">
+          <label class="control-label">{{ $t('modules.users.fields.email' )}}</label>
+          <input v-model="model.email" name="email" type="email" class="form-control" required>
+          <field-messages class="errors-list" name="email" show="$submitted">
+            <div slot="required">{{ $t('modules.users.validations.requiredEmail') }}</div>
+            <div slot="email">{{ $t('modules.users.validations.invalidEmail') }}</div>
+          </field-messages>
+        </validate>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="form-group">
+          <label class="control-label">{{ $t('modules.users.fields.password' )}}</label>
+          <input v-model="model.password" name="password" type="password" class="form-control">
+        </div>
+      </div>
     </div>
     <div class="center">
       <validate auto-label class="form-group required-field" :class="fieldClassName(formstate.gender)">

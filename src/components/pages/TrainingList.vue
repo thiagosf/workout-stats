@@ -24,6 +24,7 @@
       <button class="btn btn-sm btn-info" @click.prevent="makeWithModel">{{ $t('actions.useModel') }}</button>
     </div>
     <hr>
+    <h2>{{ $t('modules.workout.clickToEdit') }}</h2>
     <ul class="training-list-edit">
       <li v-for="(item, index) in categories">
         <a href="#" class="btn btn-danger btn-sm" @click.prevent="removeCategory(index)">
@@ -66,7 +67,9 @@
         </div>
       </li>
     </ul>
-    <button @click.prevent="onSubmit" class="btn btn-success btn-lg btn-block" :disabled="!hasCategories">{{ $t('actions.saveSettings') }}</button>
+    <div class="submit-box">
+      <button @click.prevent="onSubmit" class="btn btn-success btn-lg btn-block" :disabled="!hasCategories || sending">{{ $t('actions.saveSettings') }}</button>
+    </div>
   </div>
 </template>
 
@@ -87,7 +90,8 @@ export default {
     return {
       categories: [],
       categoryIndexEdit: null,
-      trainingIndexEdit: null
+      trainingIndexEdit: null,
+      sending: false
     }
   },
   created () {
@@ -236,6 +240,7 @@ export default {
       ]
     },
     onSubmit () {
+      this.sending = true
       this.$store.dispatch('saveTrainings', this.categories).then(() => {
         this.$router.push({ name: 'dashboard' })
       })

@@ -16,7 +16,7 @@
       </field-messages>
     </validate>
     <div class="submit-box">
-      <button class="btn btn-primary btn-lg btn-block">{{ $t('actions.login') }}</button>
+      <button class="btn btn-primary btn-lg btn-block" :disabled="sending">{{ $t('actions.login') }}</button>
     </div>
     <div :class="messageClasses">{{ message }}</div>
   </vue-form>
@@ -32,7 +32,8 @@ export default {
         email: null,
         password: null
       },
-      message: null
+      message: null,
+      sending: false
     }
   },
   computed: {
@@ -53,6 +54,7 @@ export default {
     },
     sendForm () {
       if (this.formstate.$invalid) return
+      this.sending = true
       let data = {
         email: this.model.email,
         password: this.model.password
@@ -61,6 +63,7 @@ export default {
       this.$store.dispatch('auth', data).then((user) => {
         this.$router.push({ name: 'dashboard' })
       }).catch((error) => {
+        this.sending = false
         this.message = error.body.message || this.$t('internalServerError')
       })
     }

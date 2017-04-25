@@ -79,7 +79,7 @@ export default {
         let key = moment(item.date).format('DD/MM/YY')
         chartData[key] = item.weight
       })
-      if (chartData.length > 1) {
+      if (Object.keys(chartData).length > 1) {
         this.chart = new Chartkick.LineChart('training-chart', chartData, {
           colors: ['#f4511e', '#ccc'],
           label: this.$t('stats.weight')

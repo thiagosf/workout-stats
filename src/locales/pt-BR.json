@@ -72,7 +72,8 @@
         "legsAndShoulders": "Pernas e ombros",
         "squat": "Agachamento",
         "lateralLift": "Elevação lateral"
-      }
+      },
+      "clickToEdit": "Toque/clique na categoria ou nome do treino para editar"
     }
   },
   "footer": {
