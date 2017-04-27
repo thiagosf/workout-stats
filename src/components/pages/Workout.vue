@@ -103,6 +103,7 @@ export default {
             }
           }
           this.currentIndex = newTrainingIndex
+          this.evolutionCurrentItem()
           break
         }
       }
@@ -125,6 +126,7 @@ export default {
             }
           }
           this.currentIndex = newTrainingIndex
+          this.evolutionCurrentItem()
           break
         }
       }
@@ -133,12 +135,19 @@ export default {
       if (!this.currentItem) {
         this.withoutTrainings = true
       }
+    },
+    evolutionCurrentItem () {
+      this.onEvolutionChange({
+        id: this.currentItem.id,
+        weight: this.currentItem.weight
+      })
     }
   },
   created () {
     this.$bus.$emit('enableFullSpinner')
     this.$store.dispatch('loadTrainings').then(() => {
       this.$bus.$emit('disableFullSpinner')
+      this.evolutionCurrentItem()
       this.checkHasTrainings()
     })
   }

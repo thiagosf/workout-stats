@@ -30,7 +30,7 @@ const actions = {
             throw new Error(response.body.message)
           }
         })
-    }, 3000)
+    }, 1000)
   }
 }
 
