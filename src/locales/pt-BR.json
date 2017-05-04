@@ -27,7 +27,9 @@
     "create": "Criar",
     "useModel": "Usar modelo",
     "removeCategory": "Remover categoria",
-    "saveSettings": "Salvar configurações"
+    "saveSettings": "Salvar configurações",
+    "saveTraining": "Salvar treino <span>e ir para próximo</span>",
+    "close": "Fechar"
   },
   "modules": {
     "users": {
@@ -73,7 +75,10 @@
         "squat": "Agachamento",
         "lateralLift": "Elevação lateral"
       },
-      "clickToEdit": "Toque/clique na categoria ou nome do treino para editar"
+      "clickToEdit": "Toque/clique na categoria ou nome do treino para editar",
+      "congratulations": "Yeahh!!",
+      "youFinishTraining": "Você terminou o treino de <span>%{category}</span>",
+      "nowGoRest": "Agora, vá descansar!"
     }
   },
   "footer": {

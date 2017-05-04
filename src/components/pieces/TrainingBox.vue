@@ -56,6 +56,9 @@
         @out="stopWeightInterval"
         >-</v-touch>
     </div>
+    <div class="save-training-box">
+      <button class="btn btn-primary btn-block btn-lg" @click="saveTraining" v-html="$t('actions.saveTraining')" />
+    </div>
     <div class="evolution-box">
       <div :class="statsInfoClasses">
         <p>{{ statsInfoText }}</p>
@@ -168,6 +171,9 @@ export default {
       } else {
         this.$emit('trainingChange', 'prev')
       }
+    },
+    saveTraining () {
+      this.$emit('saveTraining')
     }
   }
 }

@@ -1,10 +1,11 @@
 <template>
   <div class="workout">
+    <finish-category v-if="finishCategory" :category="currentCategory" v-on:close="resetFinishCategory" />
     <training-box
       v-if="currentItem"
-      v-on:evolutionChange="onEvolutionChange"
       v-on:categoryChange="categoryChange"
       v-on:trainingChange="trainingChange"
+      v-on:saveTraining="setEvolutionAndNext"
       :categories="categoryList"
       :trainings="trainingList"
       :item="currentItem"
@@ -24,11 +25,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { TrainingBox } from '../pieces'
+import { TrainingBox, FinishCategory } from '../pieces'
 
 export default {
   name: 'workout',
-  components: { TrainingBox },
+  components: { TrainingBox, FinishCategory },
   head: {
     title () {
       return {
@@ -39,7 +40,8 @@ export default {
   data () {
     return {
       currentIndex: 0,
-      withoutTrainings: false
+      withoutTrainings: false,
+      finishCategory: false
     }
   },
   computed: {
@@ -79,6 +81,11 @@ export default {
         })
         return list
       }
+    },
+    currentCategory () {
+      if (this.currentItem) {
+        return this.currentItem.category
+      }
     }
   },
   methods: {
@@ -86,6 +93,7 @@ export default {
       this.$store.dispatch('setEvolution', data)
     },
     categoryChange (direction) {
+      this.resetFinishCategory()
       for (let index in this.categoryList) {
         let item = this.categoryList[index]
         if (item.name === this.currentItem.category) {
@@ -103,12 +111,12 @@ export default {
             }
           }
           this.currentIndex = newTrainingIndex
-          this.evolutionCurrentItem()
           break
         }
       }
     },
     trainingChange (direction) {
+      this.resetFinishCategory()
       for (let index in this.trainingList) {
         let item = this.trainingList[index]
         if (item.id === this.currentItem.id) {
@@ -126,7 +134,6 @@ export default {
             }
           }
           this.currentIndex = newTrainingIndex
-          this.evolutionCurrentItem()
           break
         }
       }
@@ -141,13 +148,36 @@ export default {
         id: this.currentItem.id,
         weight: this.currentItem.weight
       })
+    },
+    setEvolutionAndNext () {
+      if (this.isLastTraining()) {
+        this.finishCategory = true
+      } else {
+        this.evolutionCurrentItem()
+        this.trainingChange('next')
+      }
+    },
+    isLastTraining () {
+      let itemsInCategory = this.trainings.filter((item) => {
+        return item.category === this.currentItem.category
+      })
+      let indexInCategory
+      itemsInCategory.map((item, index) => {
+        if (item.id === this.currentItem.id) {
+          indexInCategory = index
+        }
+      })
+      let lastIndex = itemsInCategory.length - 1
+      return lastIndex === indexInCategory
+    },
+    resetFinishCategory () {
+      this.finishCategory = false
     }
   },
   created () {
     this.$bus.$emit('enableFullSpinner')
     this.$store.dispatch('loadTrainings').then(() => {
       this.$bus.$emit('disableFullSpinner')
-      this.evolutionCurrentItem()
       this.checkHasTrainings()
     })
   }

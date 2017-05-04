@@ -147,20 +147,59 @@
 
 .btn-plus,
 .btn-minus
-  padding: 0 20px
+  // padding: 0 20px
   border: 0
   box-shadow: none
   font-size: 64px
-  line-height: 1
+  line-height: .7
+  background: lighten($brand-primary, 40%)
+  border-radius: 50%
+  height: 64px
+  width: 64px
   &:active,
   &:active:focus,
   &:focus
     box-shadow: none
-.btn-plus,
+.btn-plus
   color: $brand-success
   &:hover
     color: lighten($brand-success, 10%)
 .btn-minus
   color: $brand-warning
   &:hover
-    color: lighten($brand-success, 10%)
+    color: lighten($brand-warning, 10%)
+
+.save-training-box
+  text-align: center
+  margin: 0 auto 20px auto
+  @media #{$medium-up}
+    max-width: 400px
+  .btn
+    font-size: 20px
+    @media #{$medium-up}
+      font-size: 24px
+    span
+      display: block
+      font-size: 14px
+      @media #{$medium-up}
+        font-size: 16px
+
+.finish-category-box
+  text-align: center
+  position: fixed
+  z-index: 8
+  bottom: 0
+  left: 0
+  right: 0
+  top: 0
+  background: white
+  .wrapper
+    padding: 90px 40px 40px 40px
+    h1
+      font-size: 64px
+    h2
+      font-size: 32px
+      span
+        color: black
+    p
+      font-size: 20px
