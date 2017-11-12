@@ -28,7 +28,7 @@
     "useModel": "Usar modelo",
     "removeCategory": "Remover categoria",
     "saveSettings": "Salvar configurações",
-    "saveTraining": "Salvar treino <span>e ir para próximo</span>",
+    "saveTraining": "Salvar <span>e ir para próximo</span>",
     "close": "Fechar"
   },
   "modules": {
@@ -86,7 +86,7 @@
   },
   "dashboard": {
     "stats": {
-      "dateFormat": "D [de] MMM [de] YYYY",
+      "dateFormat": "DD/MM/YYYY",
       "infoText": {
         "up": "Evoluindo!",
         "repeat": "Repetindo",

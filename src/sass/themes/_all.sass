@@ -1,0 +1,43 @@
+// @import "blue"
+
+=dark-theme($color)
+  background: $color
+  color: $color-white
+  header
+    &.main-header
+      background: $color
+  .spinner
+    &.full
+      background: $color
+    > span
+      > span
+        border: 1px solid $color-white
+        border-top-color: transparent
+  .workout-box
+    .category-box
+      p
+        color: white
+  hr
+    border-top-color: rgba(white, .05)
+  .training-list-edit
+    > li
+      border-bottom-color: rgba(white, .05)
+  .training-list-edit
+    > li
+      > ul
+        border-left-color: rgba(white, .1)
+
+body.theme-blue
+  +dark-theme($color-dark-blue)
+
+body.theme-red
+  +dark-theme($color-dark-red)
+
+body.theme-green
+  +dark-theme($color-dark-green)
+
+body.theme-gray
+  +dark-theme($color-dark-gray)
+
+body.theme-purple
+  +dark-theme($color-dark-purple)

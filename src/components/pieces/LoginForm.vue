@@ -62,6 +62,7 @@ export default {
       this.message = null
       this.$store.dispatch('auth', data).then((user) => {
         this.$router.push({ name: 'dashboard' })
+        this.$bus.$emit('login')
       }).catch((error) => {
         this.sending = false
         this.message = error.body.message || this.$t('internalServerError')

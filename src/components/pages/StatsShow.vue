@@ -23,7 +23,7 @@
 
 <script>
 import Chartkick from 'chartkick'
-import moment from 'moment'
+import fecha from 'fecha'
 import { mapGetters } from 'vuex'
 import { Icon } from '../pieces'
 export default {
@@ -76,7 +76,8 @@ export default {
     mountChart () {
       let chartData = {}
       this.training.limited_evolutions.map((item) => {
-        let key = moment(item.date).format('DD/MM/YY')
+        let date = fecha.parse(item.date, 'YYYY-MM-DD')
+        let key = fecha.format(date, 'DD/MM/YY')
         chartData[key] = item.weight
       })
       if (Object.keys(chartData).length > 1) {

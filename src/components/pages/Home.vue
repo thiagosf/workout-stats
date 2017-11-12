@@ -64,6 +64,7 @@ export default {
     this.$store.dispatch('checkLogin').then((user) => {
       if (user) {
         this.$router.push({ name: 'dashboard' })
+        this.$bus.$emit('login')
       }
       this.loginChecked = true
     }).catch(() => {

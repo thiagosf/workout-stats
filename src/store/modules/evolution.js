@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import moment from 'moment'
+import fecha from 'fecha'
 import * as types from './mutation-types'
 
 const state = {
@@ -16,7 +16,7 @@ const actions = {
       token: rootGetters.getUser.token,
       training_id: data.id,
       weight: data.weight,
-      date: moment(),
+      date: fecha.format(new Date(), 'YYYY-MM-DD HH:mm:ss'),
       series: data.series || 3
     }
     Vue.http.post('evolutions/save_or_update', evolution)

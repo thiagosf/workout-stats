@@ -18,7 +18,6 @@
 
 <script>
 import WebFont from 'webfontloader'
-import moment from 'moment'
 import { mapGetters } from 'vuex'
 import {
   MainHeader,
@@ -31,7 +30,6 @@ export default {
   name: 'app',
   components: { MainHeader, MainContent, MainFooter, AppSplash, Spinner },
   created () {
-    moment.locale(this.currentLocale.locale)
     WebFont.load({
       google: {
         families: [
@@ -53,6 +51,12 @@ export default {
     })
     this.$bus.$on('disableFullSpinner', () => {
       this.loading = false
+    })
+    this.$bus.$on('login', () => {
+      this.setTheme('blue')
+    })
+    this.$bus.$on('logout', () => {
+      this.removeTheme()
     })
   },
   computed: {

@@ -23,44 +23,46 @@
       <p>{{ item.name }}</p>
     </v-touch>
     <div class="weight-box">
-      <v-touch
-        tag="span"
-        class="btn btn-plus"
-        v-on:tap="addWeight"
-        v-on:press="weightInterval('up')"
-        v-on:pressup="stopWeightInterval"
-        v-on:panend="stopWeightInterval"
-        v-on:pancancel="stopWeightInterval"
-        v-on:pandown="stopWeightInterval"
-        @click.prevent="addWeight"
-        @mousedown="weightInterval('up')"
-        @mouseup="stopWeightInterval"
-        @mouseleave="stopWeightInterval"
-        @out="stopWeightInterval"
-        >+</v-touch>
+      <div class="actions-weight">
+        <v-touch
+          tag="span"
+          class="btn btn-plus"
+          v-on:tap="addWeight"
+          v-on:press="weightInterval('up')"
+          v-on:pressup="stopWeightInterval"
+          v-on:panend="stopWeightInterval"
+          v-on:pancancel="stopWeightInterval"
+          v-on:pandown="stopWeightInterval"
+          @click.prevent="addWeight"
+          @mousedown="weightInterval('up')"
+          @mouseup="stopWeightInterval"
+          @mouseleave="stopWeightInterval"
+          @out="stopWeightInterval"
+          >+</v-touch>
+        <v-touch
+          tag="span"
+          class="btn btn-minus"
+          v-on:tap="subtractWeight"
+          v-on:press="weightInterval('down')"
+          v-on:pressup="stopWeightInterval"
+          v-on:panend="stopWeightInterval"
+          v-on:pancancel="stopWeightInterval"
+          v-on:pandown="stopWeightInterval"
+          @click.prevent="subtractWeight"
+          @mousedown="weightInterval('down')"
+          @mouseup="stopWeightInterval"
+          @mouseleave="stopWeightInterval"
+          @out="stopWeightInterval"
+          >-</v-touch>
+      </div>
       <p class="weight">{{ item.weight }}</p>
-      <p class="weight-each-side">(<span>{{ weightEachSide }}</span>kg cada lado)</p>
-      <v-touch
-        tag="span"
-        class="btn btn-minus"
-        v-on:tap="subtractWeight"
-        v-on:press="weightInterval('down')"
-        v-on:pressup="stopWeightInterval"
-        v-on:panend="stopWeightInterval"
-        v-on:pancancel="stopWeightInterval"
-        v-on:pandown="stopWeightInterval"
-        @click.prevent="subtractWeight"
-        @mousedown="weightInterval('down')"
-        @mouseup="stopWeightInterval"
-        @mouseleave="stopWeightInterval"
-        @out="stopWeightInterval"
-        >-</v-touch>
+      <p class="weight-each-side" v-if="false">(<span>{{ weightEachSide }}</span>kg cada lado)</p>
     </div>
     <div class="save-training-box">
-      <button class="btn btn-primary btn-block btn-lg" @click="saveTraining" v-html="$t('actions.saveTraining')" />
+      <button class="btn btn-primary btn-lg" @click="saveTraining" v-html="$t('actions.saveTraining')" />
     </div>
     <div class="evolution-box">
-      <div :class="statsInfoClasses">
+      <div v-if="false" :class="statsInfoClasses">
         <p>{{ statsInfoText }}</p>
       </div>
       <div class="stats">
@@ -74,7 +76,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import fecha from 'fecha'
 import Icon from './Icon'
 import DirectionActions from './DirectionActions'
 
@@ -150,7 +152,8 @@ export default {
       }
     },
     statsDate (date) {
-      return moment(date).format(this.$t('dashboard.stats.dateFormat'))
+      date = fecha.parse(date, 'YYYY-MM-DD')
+      return fecha.format(date, this.$t('dashboard.stats.dateFormat'))
     },
     evolutionChange () {
       this.$emit('evolutionChange', {

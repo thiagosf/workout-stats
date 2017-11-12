@@ -56,6 +56,7 @@ const router = new Router({
       name: 'logout',
       beforeEnter: function (to, from, next) {
         router.app.$store.dispatch('logout').then(() => {
+          router.app.$bus.$emit('logout')
           router.push({ name: 'home' })
         })
       }

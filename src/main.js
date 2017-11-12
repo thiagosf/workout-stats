@@ -37,7 +37,7 @@ i18n.install()
 
 let apiRoot = 'https://api.workout.thiagosf.net'
 if (process.env.NODE_ENV === 'development') {
-  apiRoot = 'http://train-more-api.dev.azk.io'
+  // apiRoot = 'http://train-more-api.dev.azk.io'
 }
 
 Vue.http.options.root = apiRoot
